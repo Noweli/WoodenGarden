@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
 using WoodenGardenApp.Server.Models;
-using WoodenGardenApp.Server.Models.GardenHouse;
+using WoodenGardenApp.Server.Models.Database.GardenHouse;
 
 namespace WoodenGardenApp.Server.Data;
 
