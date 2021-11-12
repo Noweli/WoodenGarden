@@ -79,6 +79,15 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not update garden house in database..
+        /// </summary>
+        internal static string ApiError_GardenHouse_FailedToUpdateInDb {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouse_FailedToUpdateInDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id has to be provided to remove garden house..
         /// </summary>
         internal static string ApiError_GardenHouseValidation_HouseIdNotProvided {
@@ -88,11 +97,29 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find arden house with provided id in database..
+        ///   Looks up a localized string similar to Could not find garden house with provided id in database..
         /// </summary>
-        internal static string ApiError_GardenHouseValidation_HouseToRemoveNotFound {
+        internal static string ApiError_GardenHouseValidation_HouseWithIdNotFound {
             get {
-                return ResourceManager.GetString("ApiError_GardenHouseValidation_HouseToRemoveNotFound", resourceCulture);
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_HouseWithIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not update garden house. Id has to be provided..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_IdToUpdateNotProvided {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_IdToUpdateNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not update garden house. Provide either new name or new description..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_NameAndDescriptionToUpdateEmpty {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_NameAndDescriptionToUpdateEmpty", resourceCulture);
             }
         }
         

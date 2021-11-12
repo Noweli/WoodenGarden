@@ -36,7 +36,7 @@ public class GardenHouseController
 
         try
         {
-            _ = await _dbContext.GardenHouseModels.AddAsync(gardenHouse);
+            _ = await _dbContext.GardenHouseModels!.AddAsync(gardenHouse);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -51,7 +51,7 @@ public class GardenHouseController
         return new OkResult();
     }
 
-    [HttpDelete]
+    [HttpDelete("delete")]
     public async Task<IActionResult> DeleteGardenHouse(int? id)
     {
         if (id is null or < 0)
@@ -59,11 +59,11 @@ public class GardenHouseController
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseIdNotProvided);
         }
 
-        var gardenHouseToRemove = await _dbContext.GardenHouseModels.FindAsync(id);
+        var gardenHouseToRemove = await _dbContext.GardenHouseModels!.FindAsync(id);
 
         if (gardenHouseToRemove is null)
         {
-            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseToRemoveNotFound);
+            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseWithIdNotFound);
         }
 
         try
@@ -76,6 +76,54 @@ public class GardenHouseController
             return new UnprocessableEntityObjectResult(new ErrorModel
             {
                 ErrorMessage = ErrorMessages.ApiError_GardenHouse_FailedToRemoveFromDb,
+                ExceptionMessage = e.Message
+            });
+        }
+
+        return new OkResult();
+    }
+
+    [HttpPatch("update")]
+    public async Task<IActionResult> UpdateGardenHouse(int? id, string? name, string? description)
+    {
+        if (id is null)
+        {
+            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToUpdateNotProvided);
+        }
+
+        if (name.IsNullOrWhiteSpace() && description.IsNullOrWhiteSpace())
+        {
+            return new BadRequestObjectResult(ErrorMessages
+                .ApiError_GardenHouseValidation_NameAndDescriptionToUpdateEmpty);
+        }
+
+        var gardenHouseToUpdate = await _dbContext.GardenHouseModels!.FindAsync(id);
+
+        if (gardenHouseToUpdate is null)
+        {
+            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseWithIdNotFound);
+        }
+
+        if (!name.IsNullOrWhiteSpace())
+        {
+            gardenHouseToUpdate.Name = name;
+        }
+
+        if (!description.IsNullOrWhiteSpace())
+        {
+            gardenHouseToUpdate.Description = description;
+        }
+
+        try
+        {
+            _ = _dbContext.GardenHouseModels.Update(gardenHouseToUpdate);
+            _ = await _dbContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            return new UnprocessableEntityObjectResult(new ErrorModel
+            {
+                ErrorMessage = ErrorMessages.ApiError_GardenHouse_FailedToUpdateInDb,
                 ExceptionMessage = e.Message
             });
         }

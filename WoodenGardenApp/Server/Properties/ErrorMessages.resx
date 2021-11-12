@@ -27,10 +27,19 @@
     <data name="ApiError_GardenHouseValidation_HouseIdNotProvided" xml:space="preserve">
         <value>Id has to be provided to remove garden house.</value>
     </data>
-    <data name="ApiError_GardenHouseValidation_HouseToRemoveNotFound" xml:space="preserve">
-        <value>Could not find arden house with provided id in database.</value>
+    <data name="ApiError_GardenHouseValidation_HouseWithIdNotFound" xml:space="preserve">
+        <value>Could not find garden house with provided id in database.</value>
     </data>
     <data name="ApiError_GardenHouse_FailedToRemoveFromDb" xml:space="preserve">
         <value>Could not remove garden house from database.</value>
+    </data>
+    <data name="ApiError_GardenHouseValidation_IdToUpdateNotProvided" xml:space="preserve">
+        <value>Could not update garden house. Id has to be provided.</value>
+    </data>
+    <data name="ApiError_GardenHouseValidation_NameAndDescriptionToUpdateEmpty" xml:space="preserve">
+        <value>Could not update garden house. Provide either new name or new description.</value>
+    </data>
+    <data name="ApiError_GardenHouse_FailedToUpdateInDb" xml:space="preserve">
+        <value>Could not update garden house in database.</value>
     </data>
 </root>

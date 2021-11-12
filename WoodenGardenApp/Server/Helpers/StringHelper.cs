@@ -2,5 +2,5 @@
 
 internal static class StringHelper
 {
-    internal static bool IsNullOrWhiteSpace(this string text) => string.IsNullOrWhiteSpace(text);
+    internal static bool IsNullOrWhiteSpace(this string? text) => string.IsNullOrWhiteSpace(text);
 }
