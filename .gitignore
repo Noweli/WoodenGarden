@@ -98,6 +98,8 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+WoodenGardenApp/Client/obj/
+
 # Chutzpah Test files
 _Chutzpah*
 

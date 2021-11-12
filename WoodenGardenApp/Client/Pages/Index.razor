@@ -1,9 +1,23 @@
 ﻿@page "/"
+@using Blazorise
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<Carousel @bind-SelectedSlide="@selectedSlide" Autoplay="false">
+    <CarouselSlide Name="1">
+        <Image Source="images\home\carousel\1.jpg" Text="Building" Display="Display.Block" Style="max-width: 100%;" />
+    </CarouselSlide>
+    <CarouselSlide Name="2">
+        <Image Source="images\home\carousel\2.jpg" Text="Buidling" Display="Display.Block" Style="max-width: 100%;" />
+    </CarouselSlide>
+    <CarouselSlide Name="3">
+        <Image Source="images\home\carousel\3.jpg" Text="Finished" Display="Display.Block" Style="max-width: 100%;" />
+    </CarouselSlide>
+    <CarouselSlide Name="4">
+        <Image Source="images\home\carousel\4.jpg" Text="Finished" Display="Display.Block" Style="max-width: 100%;" />
+    </CarouselSlide>
+</Carousel>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    private string selectedSlide = "1";
+}
