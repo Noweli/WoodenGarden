@@ -6,12 +6,14 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
+        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        <a href="authentication/profile">@context.User.Identity?.Name</a>
+        <button type="button" class="btn btn-outline-warning" @onclick="BeginSignOut">Log out</button>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/register">Register</a>
-        <a href="authentication/login">Log in</a>
+        <button type="button" class="btn btn-outline-light me-2" @onclick="@(() => Navigation.NavigateTo("authentication/login"))">Login</button>
+        <button type="button" class="btn btn-warning" @onclick="@(() => Navigation.NavigateTo("authentication/register"))">Sign-up</button>
+
     </NotAuthorized>
 </AuthorizeView>
 
