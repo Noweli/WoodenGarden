@@ -365,6 +365,47 @@ namespace WoodenGardenApp.Server.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("WoodenGardenApp.Server.Models.GardenHouse.GardenHouseImageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("GardenHouseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GardenHouseId");
+
+                    b.ToTable("GardenHouseImageModel");
+                });
+
+            modelBuilder.Entity("WoodenGardenApp.Server.Models.GardenHouse.GardenHouseModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GardenHouseModels");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -414,6 +455,22 @@ namespace WoodenGardenApp.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WoodenGardenApp.Server.Models.GardenHouse.GardenHouseImageModel", b =>
+                {
+                    b.HasOne("WoodenGardenApp.Server.Models.GardenHouse.GardenHouseModel", "GardenHouse")
+                        .WithMany("GardenHouseImages")
+                        .HasForeignKey("GardenHouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GardenHouse");
+                });
+
+            modelBuilder.Entity("WoodenGardenApp.Server.Models.GardenHouse.GardenHouseModel", b =>
+                {
+                    b.Navigation("GardenHouseImages");
                 });
 #pragma warning restore 612, 618
         }
