@@ -86,7 +86,7 @@ public class GardenHouseController
     [HttpPatch("update")]
     public async Task<IActionResult> UpdateGardenHouse(int? id, string? name, string? description)
     {
-        if (id is null)
+        if (id is null or < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToUpdateNotProvided);
         }
@@ -124,6 +124,53 @@ public class GardenHouseController
             return new UnprocessableEntityObjectResult(new ErrorModel
             {
                 ErrorMessage = ErrorMessages.ApiError_GardenHouse_FailedToUpdateInDb,
+                ExceptionMessage = e.Message
+            });
+        }
+
+        return new OkResult();
+    }
+
+    [HttpPatch("addimages")]
+    public async Task<IActionResult> AddImageToGardenHouse(int? id, List<string>? imageUrls)
+    {
+        if (id is null or < 0)
+        {
+            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToAddImageNotProvided);
+        }
+
+        if (imageUrls is null || !imageUrls.Any())
+        {
+            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImagesToAddNotProvided);
+        }
+
+        var gardenHouseToUpdate = await _dbContext.GardenHouseModels!.FindAsync(id);
+
+        if (gardenHouseToUpdate is null)
+        {
+            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseWithIdNotFound);
+        }
+
+        var imageUlrModels = new List<GardenHouseImageModel>();
+        
+        imageUrls.ForEach(url => imageUlrModels.Add(new GardenHouseImageModel
+        {
+            ImageUrl = url,
+            GardenHouseId = id.Value
+        }));
+
+        gardenHouseToUpdate.GardenHouseImages = imageUlrModels;
+
+        try
+        {
+            _ = _dbContext.GardenHouseModels.Update(gardenHouseToUpdate);
+            _ = await _dbContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            return new UnprocessableEntityObjectResult(new ErrorModel
+            {
+                ErrorMessage = ErrorMessages.ApiError_GardenHouse_AddImagesFailed,
                 ExceptionMessage = e.Message
             });
         }

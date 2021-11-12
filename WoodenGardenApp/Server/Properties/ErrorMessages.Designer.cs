@@ -61,6 +61,15 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not add images to garden house. Database error..
+        /// </summary>
+        internal static string ApiError_GardenHouse_AddImagesFailed {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouse_AddImagesFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not add garden house to database..
         /// </summary>
         internal static string ApiError_GardenHouse_FailedToAddToDb {
@@ -106,11 +115,29 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not add image to garden house. Id has to be provided..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_IdToAddImageNotProvided {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_IdToAddImageNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not update garden house. Id has to be provided..
         /// </summary>
         internal static string ApiError_GardenHouseValidation_IdToUpdateNotProvided {
             get {
                 return ResourceManager.GetString("ApiError_GardenHouseValidation_IdToUpdateNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add images to garden house. Images url not provided..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_ImagesToAddNotProvided {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImagesToAddNotProvided", resourceCulture);
             }
         }
         
