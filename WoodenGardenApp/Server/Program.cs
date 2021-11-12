@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using WoodenGardenApp.Server.Data;
 using WoodenGardenApp.Server.Models;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
