@@ -51,4 +51,13 @@
     <data name="ApiError_GardenHouse_AddImagesFailed" xml:space="preserve">
         <value>Could not add images to garden house. Database error.</value>
     </data>
+    <data name="ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided" xml:space="preserve">
+        <value>Could not delete images from garden house. Ids not provided.</value>
+    </data>
+    <data name="ApiError_GardenHouseValidation_ImagesWithProvidedIdNotFound" xml:space="preserve">
+        <value>Could not find images with provided list of ids.</value>
+    </data>
+    <data name="ApiError_GardenHouse_FailedToDeleteImagesFromDb" xml:space="preserve">
+        <value>Could not remove images from garden house. Database error.</value>
+    </data>
 </root>

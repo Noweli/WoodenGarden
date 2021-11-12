@@ -79,6 +79,15 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not remove images from garden house. Database error..
+        /// </summary>
+        internal static string ApiError_GardenHouse_FailedToDeleteImagesFromDb {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouse_FailedToDeleteImagesFromDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not remove garden house from database..
         /// </summary>
         internal static string ApiError_GardenHouse_FailedToRemoveFromDb {
@@ -133,11 +142,29 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not delete images from garden house. Ids not provided..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not add images to garden house. Images url not provided..
         /// </summary>
         internal static string ApiError_GardenHouseValidation_ImagesToAddNotProvided {
             get {
                 return ResourceManager.GetString("ApiError_GardenHouseValidation_ImagesToAddNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find images with provided list of ids..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_ImagesWithProvidedIdNotFound {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImagesWithProvidedIdNotFound", resourceCulture);
             }
         }
         

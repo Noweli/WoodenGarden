@@ -16,4 +16,5 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     }
 
     public DbSet<GardenHouseModel>? GardenHouseModels { get; set; }
+    public DbSet<GardenHouseImageModel>? GardenHouseImageModels { get; set; }
 }
