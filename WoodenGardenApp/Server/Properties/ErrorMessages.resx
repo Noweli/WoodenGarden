@@ -43,7 +43,7 @@
         <value>Could not update garden house in database.</value>
     </data>
     <data name="ApiError_GardenHouseValidation_IdToAddImageNotProvided" xml:space="preserve">
-        <value>Could not add image to garden house. Id has to be provided.</value>
+        <value>Could not add image to garden house. Garden house id has to be provided.</value>
     </data>
     <data name="ApiError_GardenHouseValidation_ImagesToAddNotProvided" xml:space="preserve">
         <value>Could not add images to garden house. Images url not provided.</value>
@@ -54,10 +54,10 @@
     <data name="ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided" xml:space="preserve">
         <value>Could not delete images from garden house. Ids not provided.</value>
     </data>
-    <data name="ApiError_GardenHouseValidation_ImagesWithProvidedIdNotFound" xml:space="preserve">
-        <value>Could not find images with provided list of ids.</value>
-    </data>
     <data name="ApiError_GardenHouse_FailedToDeleteImagesFromDb" xml:space="preserve">
         <value>Could not remove images from garden house. Database error.</value>
+    </data>
+    <data name="ApiError_GardenHouse_ImagesNotFound" xml:space="preserve">
+        <value>Could not find images with provided ids.</value>
     </data>
 </root>

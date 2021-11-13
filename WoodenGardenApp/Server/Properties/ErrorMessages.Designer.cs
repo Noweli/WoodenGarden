@@ -106,6 +106,15 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find images with provided ids..
+        /// </summary>
+        internal static string ApiError_GardenHouse_ImagesNotFound {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouse_ImagesNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id has to be provided to remove garden house..
         /// </summary>
         internal static string ApiError_GardenHouseValidation_HouseIdNotProvided {
@@ -124,7 +133,7 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not add image to garden house. Id has to be provided..
+        ///   Looks up a localized string similar to Could not add image to garden house. Garden house id has to be provided..
         /// </summary>
         internal static string ApiError_GardenHouseValidation_IdToAddImageNotProvided {
             get {
@@ -156,15 +165,6 @@ namespace WoodenGardenApp.Server.Properties {
         internal static string ApiError_GardenHouseValidation_ImagesToAddNotProvided {
             get {
                 return ResourceManager.GetString("ApiError_GardenHouseValidation_ImagesToAddNotProvided", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not find images with provided list of ids..
-        /// </summary>
-        internal static string ApiError_GardenHouseValidation_ImagesWithProvidedIdNotFound {
-            get {
-                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImagesWithProvidedIdNotFound", resourceCulture);
             }
         }
         

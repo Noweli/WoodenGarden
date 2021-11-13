@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WoodenGardenApp.Server.Data;
 using WoodenGardenApp.Server.Models.Api;
@@ -18,11 +19,11 @@ public class GardenHouseImageController
     {
         _dbContext = dbContext;
     }
-    
-    [HttpPatch("addimages")]
-    public async Task<IActionResult> AddImageToGardenHouse(int? id, List<string>? imageUrls)
+
+    [HttpPost("addimages")]
+    public async Task<IActionResult> AddImage(int? roomId, List<string>? imageUrls)
     {
-        if (id is null or < 0)
+        if (roomId is null or < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToAddImageNotProvided);
         }
@@ -32,27 +33,18 @@ public class GardenHouseImageController
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImagesToAddNotProvided);
         }
 
-        var gardenHouseToUpdate = await _dbContext.GardenHouseModels!.FindAsync(id);
-
-        if (gardenHouseToUpdate is null)
-        {
-            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseWithIdNotFound);
-        }
-
-        var imageUlrModels = new List<GardenHouseImageModel>();
+        var imagesToAdd = new List<GardenHouseImageModel>();
         
-        imageUrls.ForEach(url => imageUlrModels.Add(new GardenHouseImageModel
+        imageUrls.ForEach(imageUrl => imagesToAdd.Add(new GardenHouseImageModel
         {
-            ImageUrl = url,
-            GardenHouseId = id.Value
+            GardenHouseId = roomId.Value,
+            ImageUrl = imageUrl
         }));
-
-        gardenHouseToUpdate.GardenHouseImages = imageUlrModels;
 
         try
         {
-            _ = _dbContext.GardenHouseModels.Update(gardenHouseToUpdate);
-            _ = await _dbContext.SaveChangesAsync();
+            await _dbContext.GardenHouseImageModels!.AddRangeAsync(imagesToAdd);
+            _ = _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
         {
@@ -66,31 +58,31 @@ public class GardenHouseImageController
         return new OkResult();
     }
 
-    [HttpDelete("removeimages")]
-    public async Task<IActionResult> RemoveImages(List<int>? ids)
+    [HttpDelete("deleteimages")]
+    public async Task<IActionResult> DeleteImages(List<int>? ids)
     {
         if (ids is null || !ids.Any())
         {
-            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided);
+            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided);
         }
 
-        var imagesToDelete = _dbContext.GardenHouseImageModels!.Where(image => ids.Contains(image.Id)).ToList();
+        var imagesToBeDeleted = _dbContext.GardenHouseImageModels!.Where(image => ids.Contains(image.Id)).ToList();
 
-        if (!imagesToDelete.Any())
+        if (!imagesToBeDeleted.Any())
         {
-            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImagesWithProvidedIdNotFound);
+            return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouse_ImagesNotFound);
         }
 
         try
         {
-            _dbContext.GardenHouseImageModels!.RemoveRange(imagesToDelete);
+            _dbContext.GardenHouseImageModels!.RemoveRange(imagesToBeDeleted);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
         {
             return new UnprocessableEntityObjectResult(new ErrorModel
             {
-                ErrorMessage = ErrorMessages.ApiError_GardenHouse_AddImagesFailed,
+                ErrorMessage = ErrorMessages.ApiError_GardenHouse_FailedToDeleteImagesFromDb,
                 ExceptionMessage = e.Message
             });
         }
