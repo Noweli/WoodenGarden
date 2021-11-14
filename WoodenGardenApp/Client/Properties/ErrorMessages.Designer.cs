@@ -97,6 +97,24 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not update garden house. Api communication error..
+        /// </summary>
+        internal static string Client_GardenHouseService_HouseNotUpdated {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseService_HouseNotUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not update garden house. Either new name or new description have to be provided..
+        /// </summary>
+        internal static string Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message has to be provided in toastr..
         /// </summary>
         internal static string Client_ToastrHelper_MessageNotProvided {

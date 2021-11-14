@@ -24,6 +24,7 @@ public class GardenHouseService : IGardenHouseService
         if (name.IsNullOrWhiteSpace())
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseNameNotProvided);
+            return;
         }
 
         var gardenHouseDTO = new GardenHouseDTO
@@ -56,6 +57,7 @@ public class GardenHouseService : IGardenHouseService
         if (id is null or < 0)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseIdNotProvided);
+            return;
         }
 
         try
@@ -71,7 +73,6 @@ public class GardenHouseService : IGardenHouseService
             }
 
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseNotDeleted);
-
         }
         catch (Exception e)
         {
@@ -79,8 +80,44 @@ public class GardenHouseService : IGardenHouseService
         }
     }
 
-    public Task UpdateGardenHouse(int? id, string? name, string? description)
+    public async Task UpdateGardenHouse(int? id, string? name, string? description)
     {
-        throw new NotImplementedException();
+        if (id is null or < 0)
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseIdNotProvided);
+            return;
+        }
+
+        if (name.IsNullOrWhiteSpace() && description.IsNullOrWhiteSpace())
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided);
+            return;
+        }
+
+        var gardenHouseDTO = new GardenHouseDTO
+        {
+            Id = id,
+            Name = name,
+            Description = description
+        };
+
+        try
+        {
+            var requestUri = $"{ApiConstants.Api_GardenHouseControllerUri}/update";
+            var stringContent = gardenHouseDTO.GetStringContentAppJson();
+            var result = await _httpClient.PatchAsync(requestUri, stringContent);
+
+            if (result.IsSuccessStatusCode)
+            {
+                await _jsRuntime.ToastrSuccess(Messages.Client_GardenHouseService_HouseUpdated);
+                return;
+            }
+
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseNotUpdated);
+        }
+        catch (Exception e)
+        {
+            await _jsRuntime.ToastrError($"{ErrorMessages.Client_GardenHouseService_HouseNotUpdated}\nException message: {e.Message}");
+        }
     }
 }

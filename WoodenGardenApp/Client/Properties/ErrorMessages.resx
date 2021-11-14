@@ -33,4 +33,10 @@
     <data name="Client_GardenHouseService_HouseNotDeleted" xml:space="preserve">
         <value>Could not delete garden house. Api communication error.</value>
     </data>
+    <data name="Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided" xml:space="preserve">
+        <value>Could not update garden house. Either new name or new description have to be provided.</value>
+    </data>
+    <data name="Client_GardenHouseService_HouseNotUpdated" xml:space="preserve">
+        <value>Could not update garden house. Api communication error.</value>
+    </data>
 </root>

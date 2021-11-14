@@ -24,4 +24,7 @@
     <data name="Client_GardenHouseService_HouseDeleted" xml:space="preserve">
         <value>Garden house deleted successfully.</value>
     </data>
+    <data name="Client_GardenHouseService_HouseUpdated" xml:space="preserve">
+        <value>Garden house updated successfully.</value>
+    </data>
 </root>
