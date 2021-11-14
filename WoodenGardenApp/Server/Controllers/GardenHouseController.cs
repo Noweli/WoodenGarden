@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WoodenGardenApp.Server.Data;
-using WoodenGardenApp.Server.Helpers;
 using WoodenGardenApp.Server.Models.Api;
 using WoodenGardenApp.Server.Models.Database.GardenHouse;
 using WoodenGardenApp.Server.Properties;
+using WoodenGardenApp.Shared.Helpers;
 
 namespace WoodenGardenApp.Server.Controllers;
 
