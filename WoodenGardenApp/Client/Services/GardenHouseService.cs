@@ -35,7 +35,7 @@ public class GardenHouseService : IGardenHouseService
         try
         {
             var stringContent = gardenHouseDTO.GetStringContentAppJson();
-            var result = await _httpClient.PostAsync("api/gardenhouse/add", stringContent);
+            var result = await _httpClient.PostAsync($"{ApiConstants.Api_GardenHouseControllerUri}/add", stringContent);
 
             if (result.IsSuccessStatusCode)
             {
@@ -47,14 +47,36 @@ public class GardenHouseService : IGardenHouseService
         }
         catch (Exception e)
         {
-            await _jsRuntime.ToastrError(string.Join(ErrorMessages.Client_GardenHouseService_HouseNotAdded,
-                "\nException message: ", e.Message));
+            await _jsRuntime.ToastrError($"{ErrorMessages.Client_GardenHouseService_HouseNotAdded}\nException message: {e.Message}");
         }
     }
 
-    public Task DeleteGardenHouse(int? id)
+    public async Task DeleteGardenHouse(int? id)
     {
-        throw new NotImplementedException();
+        if (id is null or < 0)
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseIdNotProvided);
+        }
+
+        try
+        {
+            var requestUri = $"{ApiConstants.Api_GardenHouseControllerUri}/delete?id={id}";
+            var result =
+                await _httpClient.DeleteAsync(requestUri);
+
+            if (result.IsSuccessStatusCode)
+            {
+                await _jsRuntime.ToastrSuccess(Messages.Client_GardenHouseService_HouseDeleted);
+                return;
+            }
+
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseNotDeleted);
+
+        }
+        catch (Exception e)
+        {
+            await _jsRuntime.ToastrError($"{ErrorMessages.Client_GardenHouseService_HouseNotDeleted}\nException message: {e.Message}");
+        }
     }
 
     public Task UpdateGardenHouse(int? id, string? name, string? description)

@@ -22,14 +22,14 @@ namespace WoodenGardenApp.Client.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ErrorMessages {
+    internal class ApiConstants {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorMessages() {
+        internal ApiConstants() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WoodenGardenApp.Client.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WoodenGardenApp.Client.Properties.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WoodenGardenApp.Client.Properties.ApiConstants", typeof(ApiConstants).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Garden house id has to be provided correctly..
+        ///   Looks up a localized string similar to api/gardenhouse.
         /// </summary>
-        internal static string Client_GardenHouseService_HouseIdNotProvided {
+        internal static string Api_GardenHouseControllerUri {
             get {
-                return ResourceManager.GetString("Client_GardenHouseService_HouseIdNotProvided", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Garden house name has to be provided..
-        /// </summary>
-        internal static string Client_GardenHouseService_HouseNameNotProvided {
-            get {
-                return ResourceManager.GetString("Client_GardenHouseService_HouseNameNotProvided", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not add garden house. Api communication error..
-        /// </summary>
-        internal static string Client_GardenHouseService_HouseNotAdded {
-            get {
-                return ResourceManager.GetString("Client_GardenHouseService_HouseNotAdded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not delete garden house. Api communication error..
-        /// </summary>
-        internal static string Client_GardenHouseService_HouseNotDeleted {
-            get {
-                return ResourceManager.GetString("Client_GardenHouseService_HouseNotDeleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Message has to be provided in toastr..
-        /// </summary>
-        internal static string Client_ToastrHelper_MessageNotProvided {
-            get {
-                return ResourceManager.GetString("Client_ToastrHelper_MessageNotProvided", resourceCulture);
+                return ResourceManager.GetString("Api_GardenHouseControllerUri", resourceCulture);
             }
         }
     }

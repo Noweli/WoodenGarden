@@ -68,5 +68,14 @@ namespace WoodenGardenApp.Client.Properties {
                 return ResourceManager.GetString("Client_GardenHouseService_HouseAdded", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Garden house deleted successfully..
+        /// </summary>
+        internal static string Client_GardenHouseService_HouseDeleted {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseService_HouseDeleted", resourceCulture);
+            }
+        }
     }
 }

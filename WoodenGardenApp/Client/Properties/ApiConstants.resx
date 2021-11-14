@@ -18,19 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Client_ToastrHelper_MessageNotProvided" xml:space="preserve">
-        <value>Message has to be provided in toastr.</value>
-    </data>
-    <data name="Client_GardenHouseService_HouseNameNotProvided" xml:space="preserve">
-        <value>Garden house name has to be provided.</value>
-    </data>
-    <data name="Client_GardenHouseService_HouseNotAdded" xml:space="preserve">
-        <value>Could not add garden house. Api communication error.</value>
-    </data>
-    <data name="Client_GardenHouseService_HouseIdNotProvided" xml:space="preserve">
-        <value>Garden house id has to be provided correctly.</value>
-    </data>
-    <data name="Client_GardenHouseService_HouseNotDeleted" xml:space="preserve">
-        <value>Could not delete garden house. Api communication error.</value>
+    <data name="Api_GardenHouseControllerUri" xml:space="preserve">
+        <value>api/gardenhouse</value>
     </data>
 </root>
