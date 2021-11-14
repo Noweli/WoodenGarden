@@ -29,11 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Helpers" />
     <Folder Include="Models\Database" />
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
+    <InternalsVisibleTo Include="$(AssemblyName).Tests" />
     <EmbeddedResource Update="Properties\ErrorMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
@@ -41,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
+    <InternalsVisibleTo Include="$(AssemblyName).Tests" />
     <Compile Update="Properties\ErrorMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
