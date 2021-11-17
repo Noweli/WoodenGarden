@@ -68,5 +68,14 @@ namespace WoodenGardenApp.Client.Properties {
                 return ResourceManager.GetString("Api_GardenHouseControllerUri", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to api/gardenhouseimage.
+        /// </summary>
+        internal static string Api_GardenHouseImageControllerUri {
+            get {
+                return ResourceManager.GetString("Api_GardenHouseImageControllerUri", resourceCulture);
+            }
+        }
     }
 }

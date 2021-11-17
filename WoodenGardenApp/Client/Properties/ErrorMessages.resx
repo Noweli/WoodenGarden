@@ -54,4 +54,16 @@
     <data name="Client_FileUpload_FileNotDeletedError" xml:space="preserve">
         <value>Could not delete file. Error occured while removing file.</value>
     </data>
+    <data name="Client_GardenHouseImageService_RoomIdNotProvided" xml:space="preserve">
+        <value>Could not add image. Room id not provided.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_ImageUrlsNotProvided" xml:space="preserve">
+        <value>Could not add image. Image urls not provided.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_ResponseErrorImageNotAdded" xml:space="preserve">
+        <value>Could not add image. Api returned error.</value>
+    </data>
+    <data name="Client_GardenHouseServiceImage_ImageNotAddedException" xml:space="preserve">
+        <value>Could not add image. Error occured.</value>
+    </data>
 </root>

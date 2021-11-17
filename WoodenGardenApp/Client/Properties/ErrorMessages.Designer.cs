@@ -106,6 +106,33 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Image urls not provided..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_ImageUrlsNotProvided {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_ImageUrlsNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Api returned error..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_ResponseErrorImageNotAdded {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_ResponseErrorImageNotAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Room id not provided..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_RoomIdNotProvided {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_RoomIdNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Garden house id has to be provided correctly..
         /// </summary>
         internal static string Client_GardenHouseService_HouseIdNotProvided {
@@ -156,6 +183,15 @@ namespace WoodenGardenApp.Client.Properties {
         internal static string Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided {
             get {
                 return ResourceManager.GetString("Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Error occured..
+        /// </summary>
+        internal static string Client_GardenHouseServiceImage_ImageNotAddedException {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseServiceImage_ImageNotAddedException", resourceCulture);
             }
         }
         
