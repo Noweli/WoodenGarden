@@ -61,6 +61,24 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not upload file. File name empty..
+        /// </summary>
+        internal static string Client_FileUpload_FileNameEmpty {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not upload file. Error occured while saving..
+        /// </summary>
+        internal static string Client_FileUpload_FileNotAdded {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileNotAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Garden house id has to be provided correctly..
         /// </summary>
         internal static string Client_GardenHouseService_HouseIdNotProvided {
