@@ -61,6 +61,15 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not delete file. File name empty..
+        /// </summary>
+        internal static string Client_FileUpload_DeleteFileNameEmpty {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_DeleteFileNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not upload file. File name empty..
         /// </summary>
         internal static string Client_FileUpload_FileNameEmpty {
@@ -75,6 +84,24 @@ namespace WoodenGardenApp.Client.Properties {
         internal static string Client_FileUpload_FileNotAdded {
             get {
                 return ResourceManager.GetString("Client_FileUpload_FileNotAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not delete file. Error occured while removing file..
+        /// </summary>
+        internal static string Client_FileUpload_FileNotDeletedError {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileNotDeletedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not delete file. File not exists..
+        /// </summary>
+        internal static string Client_FileUpload_FileToDeleteNotExists {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileToDeleteNotExists", resourceCulture);
             }
         }
         

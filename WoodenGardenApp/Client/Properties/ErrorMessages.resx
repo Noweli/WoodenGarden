@@ -45,4 +45,13 @@
     <data name="Client_FileUpload_FileNameEmpty" xml:space="preserve">
         <value>Could not upload file. File name empty.</value>
     </data>
+    <data name="Client_FileUpload_DeleteFileNameEmpty" xml:space="preserve">
+        <value>Could not delete file. File name empty.</value>
+    </data>
+    <data name="Client_FileUpload_FileToDeleteNotExists" xml:space="preserve">
+        <value>Could not delete file. File not exists.</value>
+    </data>
+    <data name="Client_FileUpload_FileNotDeletedError" xml:space="preserve">
+        <value>Could not delete file. Error occured while removing file.</value>
+    </data>
 </root>

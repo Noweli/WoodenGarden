@@ -4,6 +4,7 @@ using Microsoft.JSInterop;
 using WoodenGardenApp.Client.Helpers.JsHelpers;
 using WoodenGardenApp.Client.Properties;
 using WoodenGardenApp.Client.Services.IServices;
+using WoodenGardenApp.Shared.Helpers;
 
 namespace WoodenGardenApp.Client.Services;
 
@@ -50,8 +51,31 @@ public class FileUploadService : IFileUpload
         return $"{_navigationManager.BaseUri}\\{ImagesDirectory}\\{fileName}";
     }
 
-    public bool DeleteFile(string fileName)
+    public async Task<bool> DeleteFile(string fileName)
     {
-        throw new NotImplementedException();
+        if (fileName.IsNullOrWhiteSpace())
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_DeleteFileNameEmpty);
+            return false;
+        }
+        
+        var path = $"{ImagesDirectory}\\{fileName}";
+
+        if (!File.Exists(path))
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_FileToDeleteNotExists);
+            return false;
+        }
+
+        try
+        {
+            File.Delete(path);
+        }
+        catch (Exception e)
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_FileNotDeletedError);
+        }
+
+        return true;
     }
 }
