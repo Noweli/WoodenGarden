@@ -21,4 +21,7 @@
     <data name="Api_GardenHouseControllerUri" xml:space="preserve">
         <value>api/gardenhouse</value>
     </data>
+    <data name="Api_GardenHouseImageControllerUri" xml:space="preserve">
+        <value>api/gardenhouseimage</value>
+    </data>
 </root>

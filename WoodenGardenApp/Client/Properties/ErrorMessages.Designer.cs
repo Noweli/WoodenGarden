@@ -61,6 +61,87 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not delete file. File name empty..
+        /// </summary>
+        internal static string Client_FileUpload_DeleteFileNameEmpty {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_DeleteFileNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not upload file. File name empty..
+        /// </summary>
+        internal static string Client_FileUpload_FileNameEmpty {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not upload file. Error occured while saving..
+        /// </summary>
+        internal static string Client_FileUpload_FileNotAdded {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileNotAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not delete file. Error occured while removing file..
+        /// </summary>
+        internal static string Client_FileUpload_FileNotDeletedError {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileNotDeletedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not delete file. File not exists..
+        /// </summary>
+        internal static string Client_FileUpload_FileToDeleteNotExists {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileToDeleteNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not delete images. Error occured..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_DeleteImagesException {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_DeleteImagesException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Image urls not provided..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_ImageUrlsNotProvided {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_ImageUrlsNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Api returned error..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_ResponseErrorImageNotAdded {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_ResponseErrorImageNotAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Room id not provided..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_RoomIdNotProvided {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_RoomIdNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Garden house id has to be provided correctly..
         /// </summary>
         internal static string Client_GardenHouseService_HouseIdNotProvided {
@@ -106,11 +187,38 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not delete images. Ids not provided..
+        /// </summary>
+        internal static string Client_GardenHouseService_ImageIdsToDeleteNotProvided {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseService_ImageIdsToDeleteNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not update garden house. Either new name or new description have to be provided..
         /// </summary>
         internal static string Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided {
             get {
                 return ResourceManager.GetString("Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not delete images. Api error..
+        /// </summary>
+        internal static string Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image. Error occured..
+        /// </summary>
+        internal static string Client_GardenHouseServiceImage_ImageNotAddedException {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseServiceImage_ImageNotAddedException", resourceCulture);
             }
         }
         

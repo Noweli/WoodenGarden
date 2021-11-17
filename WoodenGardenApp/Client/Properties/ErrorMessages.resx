@@ -39,4 +39,40 @@
     <data name="Client_GardenHouseService_HouseNotUpdated" xml:space="preserve">
         <value>Could not update garden house. Api communication error.</value>
     </data>
+    <data name="Client_FileUpload_FileNotAdded" xml:space="preserve">
+        <value>Could not upload file. Error occured while saving.</value>
+    </data>
+    <data name="Client_FileUpload_FileNameEmpty" xml:space="preserve">
+        <value>Could not upload file. File name empty.</value>
+    </data>
+    <data name="Client_FileUpload_DeleteFileNameEmpty" xml:space="preserve">
+        <value>Could not delete file. File name empty.</value>
+    </data>
+    <data name="Client_FileUpload_FileToDeleteNotExists" xml:space="preserve">
+        <value>Could not delete file. File not exists.</value>
+    </data>
+    <data name="Client_FileUpload_FileNotDeletedError" xml:space="preserve">
+        <value>Could not delete file. Error occured while removing file.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_RoomIdNotProvided" xml:space="preserve">
+        <value>Could not add image. Room id not provided.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_ImageUrlsNotProvided" xml:space="preserve">
+        <value>Could not add image. Image urls not provided.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_ResponseErrorImageNotAdded" xml:space="preserve">
+        <value>Could not add image. Api returned error.</value>
+    </data>
+    <data name="Client_GardenHouseServiceImage_ImageNotAddedException" xml:space="preserve">
+        <value>Could not add image. Error occured.</value>
+    </data>
+    <data name="Client_GardenHouseService_ImageIdsToDeleteNotProvided" xml:space="preserve">
+        <value>Could not delete images. Ids not provided.</value>
+    </data>
+    <data name="Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted" xml:space="preserve">
+        <value>Could not delete images. Api error.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_DeleteImagesException" xml:space="preserve">
+        <value>Could not delete images. Error occured.</value>
+    </data>
 </root>
