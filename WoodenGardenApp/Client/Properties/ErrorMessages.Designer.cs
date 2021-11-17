@@ -106,6 +106,15 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not delete images. Error occured..
+        /// </summary>
+        internal static string Client_GardenHouseImageService_DeleteImagesException {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseImageService_DeleteImagesException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not add image. Image urls not provided..
         /// </summary>
         internal static string Client_GardenHouseImageService_ImageUrlsNotProvided {
@@ -178,11 +187,29 @@ namespace WoodenGardenApp.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not delete images. Ids not provided..
+        /// </summary>
+        internal static string Client_GardenHouseService_ImageIdsToDeleteNotProvided {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseService_ImageIdsToDeleteNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not update garden house. Either new name or new description have to be provided..
         /// </summary>
         internal static string Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided {
             get {
                 return ResourceManager.GetString("Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not delete images. Api error..
+        /// </summary>
+        internal static string Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted", resourceCulture);
             }
         }
         

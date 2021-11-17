@@ -56,8 +56,28 @@ public class GardenHouseImageService : IGardenHouseImageService
         }
     }
 
-    public Task DeleteImage(int? imageId)
+    public async Task DeleteImage(List<int>? imageId)
     {
-        throw new NotImplementedException();
+        if (imageId is null || !imageId.Any())
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_ImageIdsToDeleteNotProvided);
+            return;
+        }
+
+        try
+        {
+            var response = await _httpClient.DeleteAsync(
+                $"{ApiConstants.Api_GardenHouseImageControllerUri}\\deleteimages?ids={imageId}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                await _jsRuntime.ToastrError(
+                    $"{ErrorMessages.Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted} Status code: {response.StatusCode}");
+            }
+        }
+        catch (Exception e)
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseImageService_DeleteImagesException);
+        }
     }
 }

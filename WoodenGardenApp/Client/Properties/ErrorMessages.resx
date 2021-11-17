@@ -66,4 +66,13 @@
     <data name="Client_GardenHouseServiceImage_ImageNotAddedException" xml:space="preserve">
         <value>Could not add image. Error occured.</value>
     </data>
+    <data name="Client_GardenHouseService_ImageIdsToDeleteNotProvided" xml:space="preserve">
+        <value>Could not delete images. Ids not provided.</value>
+    </data>
+    <data name="Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted" xml:space="preserve">
+        <value>Could not delete images. Api error.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_DeleteImagesException" xml:space="preserve">
+        <value>Could not delete images. Error occured.</value>
+    </data>
 </root>
