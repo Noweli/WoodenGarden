@@ -3,7 +3,7 @@
 
 <PageTitle>Home</PageTitle>
 
-<Carousel @bind-SelectedSlide="@selectedSlide" Autoplay="false">
+<Carousel @bind-SelectedSlide="@_selectedSlide" Autoplay="false">
     <CarouselSlide Name="1">
         <Image Source="images\home\carousel\1.jpg" Text="Building" Display="Display.Block" Style="max-width: 100%;" />
     </CarouselSlide>
@@ -19,5 +19,5 @@
 </Carousel>
 
 @code {
-    private string selectedSlide = "1";
+    private string _selectedSlide = "1";
 }
