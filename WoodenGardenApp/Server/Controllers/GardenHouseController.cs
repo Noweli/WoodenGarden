@@ -52,9 +52,9 @@ public class GardenHouseController
     }
 
     [HttpDelete("delete")]
-    public async Task<IActionResult> DeleteGardenHouse(int? id)
+    public async Task<IActionResult> DeleteGardenHouse(int id)
     {
-        if (id is null or < 0)
+        if (id < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseIdNotProvided);
         }
@@ -84,9 +84,9 @@ public class GardenHouseController
     }
 
     [HttpPatch("update")]
-    public async Task<IActionResult> UpdateGardenHouse(int? id, string? name, string? description)
+    public async Task<IActionResult> UpdateGardenHouse(int id, string? name, string? description)
     {
-        if (id is null or < 0)
+        if (id < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToUpdateNotProvided);
         }
