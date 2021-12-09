@@ -52,9 +52,9 @@ public class GardenHouseService : IGardenHouseService
         }
     }
 
-    public async Task DeleteGardenHouse(int? id)
+    public async Task DeleteGardenHouse(int id)
     {
-        if (id is null or < 0)
+        if (id < 0)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseIdNotProvided);
             return;
@@ -80,9 +80,9 @@ public class GardenHouseService : IGardenHouseService
         }
     }
 
-    public async Task UpdateGardenHouse(int? id, string? name, string? description)
+    public async Task UpdateGardenHouse(int id, string? name, string? description)
     {
-        if (id is null or < 0)
+        if (id < 0)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseIdNotProvided);
             return;

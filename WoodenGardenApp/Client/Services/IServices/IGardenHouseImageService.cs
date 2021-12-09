@@ -2,6 +2,6 @@
 
 public interface IGardenHouseImageService
 {
-    Task AddImage(int? roomId, List<string>? imageUrl);
+    Task AddImage(int roomId, List<string>? imageUrl);
     Task DeleteImage(List<int>? imageId);
 }

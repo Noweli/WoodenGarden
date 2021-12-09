@@ -27,7 +27,7 @@ public class GardenHouseImageControllerTests
 
     [TestCase(null)]
     [TestCase(-1)]
-    public async Task AddImage_RoomIdIncorrect_ReturnBadRequestObjectResult(int? roomId)
+    public async Task AddImage_RoomIdIncorrect_ReturnBadRequestObjectResult(int roomId)
     {
         //Arrange
         //Act
@@ -39,7 +39,7 @@ public class GardenHouseImageControllerTests
     
     [TestCase(null)]
     [TestCase(-1)]
-    public async Task AddImage_RoomIdIncorrect_ReturnErrorMessage(int? roomId)
+    public async Task AddImage_RoomIdIncorrect_ReturnErrorMessage(int roomId)
     {
         //Arrange
         //Act

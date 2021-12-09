@@ -20,9 +20,9 @@ public class GardenHouseImageService : IGardenHouseImageService
         _jsRuntime = jsRuntime;
     }
 
-    public async Task AddImage(int? roomId, List<string>? imageUrls)
+    public async Task AddImage(int roomId, List<string>? imageUrls)
     {
-        if (roomId is null or < 0)
+        if (roomId < 0)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseImageService_RoomIdNotProvided);
             return;
@@ -36,7 +36,7 @@ public class GardenHouseImageService : IGardenHouseImageService
 
         var gardenHouseImageDTO = new GardenHouseImageDTO
         {
-            RoomId = roomId.Value,
+            RoomId = roomId,
             ImageUrls = imageUrls
         };
 

@@ -64,7 +64,7 @@ public class GardenHouseControllerTests
 
     [TestCase(null)]
     [TestCase(-1)]
-    public async Task DeleteGardenHouse_IncorrectIdProvided_ReturnBadRequestObjectResult(int? id)
+    public async Task DeleteGardenHouse_IncorrectIdProvided_ReturnBadRequestObjectResult(int id)
     {
         //Arrange
         //Act
@@ -76,7 +76,7 @@ public class GardenHouseControllerTests
     
     [TestCase(null)]
     [TestCase(-1)]
-    public async Task DeleteGardenHouse_IncorrectIdProvided_ReturnErrorMessage(int? id)
+    public async Task DeleteGardenHouse_IncorrectIdProvided_ReturnErrorMessage(int id)
     {
         //Arrange
         //Act
@@ -89,7 +89,7 @@ public class GardenHouseControllerTests
 
     [TestCase(null)]
     [TestCase(-1)]
-    public async Task UpdateGardenHouse_IncorrectIdProvided_ReturnBadRequestObjectResult(int? id)
+    public async Task UpdateGardenHouse_IncorrectIdProvided_ReturnBadRequestObjectResult(int id)
     {
         //Arrange
         //Act
@@ -101,7 +101,7 @@ public class GardenHouseControllerTests
     
     [TestCase(null)]
     [TestCase(-1)]
-    public async Task UpdateGardenHouse_IncorrectIdProvided_ReturnErrorMessage(int? id)
+    public async Task UpdateGardenHouse_IncorrectIdProvided_ReturnErrorMessage(int id)
     {
         //Arrange
         //Act

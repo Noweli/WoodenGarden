@@ -20,9 +20,9 @@ public class GardenHouseImageController
     }
 
     [HttpPost("addimages")]
-    public async Task<IActionResult> AddImage(int? roomId, List<string>? imageUrls)
+    public async Task<IActionResult> AddImage(int roomId, List<string>? imageUrls)
     {
-        if (roomId is null or < 0)
+        if (roomId < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToAddImageNotProvided);
         }
@@ -36,7 +36,7 @@ public class GardenHouseImageController
         
         imageUrls.ForEach(imageUrl => imagesToAdd.Add(new GardenHouseImageModel
         {
-            GardenHouseId = roomId.Value,
+            GardenHouseId = roomId,
             ImageUrl = imageUrl
         }));
 
