@@ -1,10 +1,11 @@
 ﻿@page "/gardenhouses"
 @using WoodenGardenApp.Shared.DTOs
+@inject NavigationManager _navigationManager
 
 <AuthorizeView>
     <div class="input-group bg-secondary border-dark shadow-sm p-2 mb-2">
         <p class="text-danger m-2 fw-bold">Admin options: </p>
-        <btn class="btn btn-outline-success">Add new</btn>
+        <btn class="btn btn-outline-success" @onclick="NavigateToAddNewGardenHouse">Add new</btn>
     </div>
 </AuthorizeView>
 
@@ -32,4 +33,6 @@
             "images\\home\\carousel\\2.jpg"
         },
     };
+
+    private void NavigateToAddNewGardenHouse() => _navigationManager.NavigateTo("AddGardenHouse");
 }

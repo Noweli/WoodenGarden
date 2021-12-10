@@ -88,6 +88,15 @@ namespace WoodenGardenApp.Server.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not get all house models from api..
+        /// </summary>
+        internal static string ApiError_GardenHouse_FailedToGetHouses {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouse_FailedToGetHouses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not remove garden house from database..
         /// </summary>
         internal static string ApiError_GardenHouse_FailedToRemoveFromDb {
