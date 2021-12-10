@@ -60,4 +60,7 @@
     <data name="ApiError_GardenHouse_ImagesNotFound" xml:space="preserve">
         <value>Could not find images with provided ids.</value>
     </data>
+    <data name="ApiError_GardenHouse_FailedToGetHouses" xml:space="preserve">
+        <value>Could not get all house models from api.</value>
+    </data>
 </root>
