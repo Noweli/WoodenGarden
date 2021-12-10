@@ -5,6 +5,7 @@ using WoodenGardenApp.Server.Data;
 using WoodenGardenApp.Server.Models.Api;
 using WoodenGardenApp.Server.Models.Database.GardenHouse;
 using WoodenGardenApp.Server.Properties;
+using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
 
 namespace WoodenGardenApp.Server.Controllers;
@@ -22,17 +23,17 @@ public class GardenHouseController
     }
 
     [HttpPost("add")]
-    public async Task<IActionResult> AddGardenHouse(string name, string? description)
+    public async Task<IActionResult> AddGardenHouse([FromBody] GardenHouseDTO gardenHouseDTO)
     {
-        if (name.IsNullOrWhiteSpace())
+        if (gardenHouseDTO.Name.IsNullOrWhiteSpace())
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_NameIsEmpty);
         }
 
         var gardenHouse = new GardenHouseModel
         {
-            Name = name,
-            Description = description ?? string.Empty
+            Name = gardenHouseDTO.Name,
+            Description = gardenHouseDTO.Description ?? string.Empty
         };
 
         try
