@@ -27,13 +27,13 @@ public class GardenHouseControllerTests
 
     [TestCase(null, "Description")]
     [TestCase("", "Description")]
-    public async Task AddGardenHouse_NameNotProvided_ReturnBadRequestObjectResult(string? name, string? description)
+    public async Task AddGardenHouse_NameNotProvided_ReturnBadRequestObjectResult(string name, string description)
     {
         //Arrange
         var gardenHouseDTO = new GardenHouseDTO
         {
-            Name = "Test",
-            Description = "TestDesc"
+            Name = name,
+            Description = description
         };
         
         //Act
@@ -45,13 +45,13 @@ public class GardenHouseControllerTests
     
     [TestCase(null, "Description")]
     [TestCase("", "Description")]
-    public async Task AddGardenHouse_NameNotProvided_ReturnStatusCode400(string? name, string? description)
+    public async Task AddGardenHouse_NameNotProvided_ReturnStatusCode400(string name, string description)
     {
         //Arrange
         var gardenHouseDTO = new GardenHouseDTO
         {
-            Name = "Test",
-            Description = "TestDesc"
+            Name = name,
+            Description = description
         };
         
         //Act
@@ -64,13 +64,13 @@ public class GardenHouseControllerTests
 
     [TestCase(null, "Description")]
     [TestCase("", "Description")]
-    public async Task AddGardenHouse_NameNotProvided_ReturnErrorMessage(string? name, string? description)
+    public async Task AddGardenHouse_NameNotProvided_ReturnErrorMessage(string name, string description)
     {
         //Arrange
         var gardenHouseDTO = new GardenHouseDTO
         {
-            Name = "Test",
-            Description = "TestDesc"
+            Name = name,
+            Description = description
         };
         
         //Act
@@ -80,8 +80,7 @@ public class GardenHouseControllerTests
         //Assert
         badRequestObjectResult?.Value.Should().BeSameAs(ErrorMessages.ApiError_GardenHouseValidation_NameIsEmpty);
     }
-
-    [TestCase(null)]
+    
     [TestCase(-1)]
     public async Task DeleteGardenHouse_IncorrectIdProvided_ReturnBadRequestObjectResult(int id)
     {
@@ -93,7 +92,6 @@ public class GardenHouseControllerTests
         result.Should().BeOfType<BadRequestObjectResult>();
     }
     
-    [TestCase(null)]
     [TestCase(-1)]
     public async Task DeleteGardenHouse_IncorrectIdProvided_ReturnErrorMessage(int id)
     {
@@ -105,8 +103,7 @@ public class GardenHouseControllerTests
         //Assert
         badRequestObjectResult?.Value.Should().BeSameAs(ErrorMessages.ApiError_GardenHouseValidation_HouseIdNotProvided);
     }
-
-    [TestCase(null)]
+    
     [TestCase(-1)]
     public async Task UpdateGardenHouse_IncorrectIdProvided_ReturnBadRequestObjectResult(int id)
     {
@@ -118,7 +115,6 @@ public class GardenHouseControllerTests
         result.Should().BeOfType<BadRequestObjectResult>();
     }
     
-    [TestCase(null)]
     [TestCase(-1)]
     public async Task UpdateGardenHouse_IncorrectIdProvided_ReturnErrorMessage(int id)
     {
