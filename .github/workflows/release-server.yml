@@ -37,6 +37,13 @@ jobs:
 
         # Build everything
         dotnet publish WoodenGardenApp/Server/WoodenGardenApp.Server.csproj --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+        
+        # Create ef bundle
+        if [ "${{ matrix.target }}" == "win-x64" ]; then
+          dotnet ef migartions bundle --configuration Bundle --project WoodenGardenApp/Server/WoodenGardenApp.Server.csproj -o "$release_name"
+        else
+          dotnet ef migrations bundle --project WoodenGardenApp/Server/WoodenGardenApp.Server.csproj --verbose -o "$release_name"
+        fi
 
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then
