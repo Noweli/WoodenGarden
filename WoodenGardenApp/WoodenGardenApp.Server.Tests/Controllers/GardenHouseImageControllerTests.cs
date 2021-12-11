@@ -37,7 +37,6 @@ public class GardenHouseImageControllerTests
         result.Should().BeOfType<BadRequestObjectResult>();
     }
     
-    [TestCase(null)]
     [TestCase(-1)]
     public async Task AddImage_RoomIdIncorrect_ReturnErrorMessage(int roomId)
     {
