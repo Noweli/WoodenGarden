@@ -7,6 +7,7 @@ using NUnit.Framework;
 using WoodenGardenApp.Server.Controllers;
 using WoodenGardenApp.Server.Data;
 using WoodenGardenApp.Server.Properties;
+using WoodenGardenApp.Shared.DTOs;
 
 namespace ServerUnitTests.Controllers;
 
@@ -29,8 +30,14 @@ public class GardenHouseControllerTests
     public async Task AddGardenHouse_NameNotProvided_ReturnBadRequestObjectResult(string? name, string? description)
     {
         //Arrange
+        var gardenHouseDTO = new GardenHouseDTO
+        {
+            Name = "Test",
+            Description = "TestDesc"
+        };
+        
         //Act
-        var result = await _gardenHouseController!.AddGardenHouse(name!, description);
+        var result = await _gardenHouseController!.AddGardenHouse(gardenHouseDTO);
 
         //Assert
         result.Should().BeOfType<BadRequestObjectResult>();
@@ -41,8 +48,14 @@ public class GardenHouseControllerTests
     public async Task AddGardenHouse_NameNotProvided_ReturnStatusCode400(string? name, string? description)
     {
         //Arrange
+        var gardenHouseDTO = new GardenHouseDTO
+        {
+            Name = "Test",
+            Description = "TestDesc"
+        };
+        
         //Act
-        var result = await _gardenHouseController!.AddGardenHouse(name!, description);
+        var result = await _gardenHouseController!.AddGardenHouse(gardenHouseDTO);
         var badRequestObjectResult = result as BadRequestObjectResult;
 
         //Assert
@@ -54,8 +67,14 @@ public class GardenHouseControllerTests
     public async Task AddGardenHouse_NameNotProvided_ReturnErrorMessage(string? name, string? description)
     {
         //Arrange
+        var gardenHouseDTO = new GardenHouseDTO
+        {
+            Name = "Test",
+            Description = "TestDesc"
+        };
+        
         //Act
-        var result = await _gardenHouseController!.AddGardenHouse(name!, description);
+        var result = await _gardenHouseController!.AddGardenHouse(gardenHouseDTO);
         var badRequestObjectResult = result as BadRequestObjectResult;
 
         //Assert
