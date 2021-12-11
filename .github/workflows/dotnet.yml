@@ -21,7 +21,7 @@ jobs:
       run: dotnet restore
       working-directory: WoodenGardenApp/Server
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --configuration Release --no-restore
       working-directory: WoodenGardenApp/Server
     - name: Test
       run: dotnet test --no-build --verbosity normal
