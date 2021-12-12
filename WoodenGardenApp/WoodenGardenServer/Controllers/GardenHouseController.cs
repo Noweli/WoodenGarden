@@ -114,7 +114,7 @@ public class GardenHouseController
             gardenHouseToUpdate.Name = name;
         }
 
-        if (!description.IsNullOrWhiteSpace())
+        if (description is not null)
         {
             gardenHouseToUpdate.Description = description;
         }
