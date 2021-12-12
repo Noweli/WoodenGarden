@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K8HXNoA2gFeujCmWg4QVVHwCupOpn7K/69DM3+hpe4bQKc9YCilqNY2xfUSCucpF5wUWqrpQ+ZC0UsxntrUuXA==",
+  "dgSpecHash": "ymZRXXqtY3JQP5NSG1wgrYkg0iVWaTzPEp6pvuF5N9et8weRSn74rQ4dNiRbj1BPeFIxlfSzxRxXGJkjxgwXvA==",
   "success": true,
-  "projectFilePath": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\WoodenGardenApp.Shared.csproj",
+  "projectFilePath": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

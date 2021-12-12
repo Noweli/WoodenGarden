@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WoodenGardenApp.Server.Data;
-using WoodenGardenApp.Server.Models.Api;
-using WoodenGardenApp.Server.Models.Database.GardenHouse;
-using WoodenGardenApp.Server.Properties;
 using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
+using WoodenGardenServer.Data;
+using WoodenGardenServer.Models.Api;
+using WoodenGardenServer.Models.Database.GardenHouse;
+using WoodenGardenServer.Properties;
 
-namespace WoodenGardenApp.Server.Controllers;
+namespace WoodenGardenServer.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class GardenHouseController
