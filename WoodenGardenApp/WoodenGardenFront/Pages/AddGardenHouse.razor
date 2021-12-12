@@ -1,0 +1,76 @@
+﻿@page "/AddGardenHouse"
+@using WoodenGardenFront.Services.IServices
+@using WoodenGardenApp.Shared.DTOs
+@using Blazored.TextEditor
+@inject IGardenHouseService _gardenHouseService
+
+<div class="container align-self-center mt-2 border-dark border-2 bg-light">
+    <EditForm Model="@GardenHouseDTO" OnValidSubmit="AddGardenHouseToDatabase">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
+        <div class="form-group">
+            <label>Garden house name</label>
+            <InputText @bind-Value="GardenHouseDTO.Name"></InputText>
+            <ValidationMessage For="() => GardenHouseDTO!.Name"/>
+        </div>
+        <div class="form-group">
+            <label>Garden house description</label>
+            <BlazoredTextEditor @ref="BlazoredTextEditor" Placeholder="Enter garden house description">
+                <ToolbarContent>
+                    <select class="ql-header">
+                        <option selected=""></option>
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                    </select>
+                    <span class="ql-formats">
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-color"></select>
+                        <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-link"></button>
+                    </span>
+                </ToolbarContent>
+                <EditorContent>@((MarkupString) DescriptionHTML!)</EditorContent>
+            </BlazoredTextEditor>
+        </div>
+        
+        <div class="form-group">
+            <button class="btn btn-primary">Add room</button>
+            <NavLink href="gardenhouses" class="btn btn-outline-info">Back</NavLink>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private GardenHouseDTO? GardenHouseDTO { get; } = new GardenHouseDTO();
+    private BlazoredTextEditor? BlazoredTextEditor { get; set; }
+    private string? DescriptionHTML { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if (GardenHouseDTO is not null)
+        {
+            DescriptionHTML = GardenHouseDTO.Description ?? string.Empty;
+        }
+        return Task.CompletedTask;
+    }
+
+    private void AddGardenHouseToDatabase()
+    {
+        _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
+    }
+}

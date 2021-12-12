@@ -36,7 +36,8 @@ jobs:
         release_name="App-$tag-${{ matrix.target }}"
 
         # Build everything
-        dotnet publish WoodenGardenApp/Server/WoodenGardenApp.Server.csproj --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+        dotnet publish WoodenGardenApp/WoodenGardenServer/WoodenGardenServer.csproj --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+
 
         # Pack files
           if [ "${{ matrix.target }}" == "win-x64" ]; then
