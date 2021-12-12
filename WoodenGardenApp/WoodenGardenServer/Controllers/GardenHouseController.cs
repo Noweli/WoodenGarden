@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
 using WoodenGardenServer.Data;
@@ -23,6 +24,8 @@ public class GardenHouseController
     [HttpPost("add")]
     public async Task<IActionResult> AddGardenHouse([FromBody] GardenHouseDTO gardenHouseDTO)
     {
+        EntityEntry<GardenHouseModel> addedGardenHouse;
+        
         if (gardenHouseDTO.Name.IsNullOrWhiteSpace())
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_NameIsEmpty);
@@ -36,7 +39,7 @@ public class GardenHouseController
 
         try
         {
-            _ = await _dbContext.GardenHouseModels!.AddAsync(gardenHouse);
+            addedGardenHouse = await _dbContext.GardenHouseModels!.AddAsync(gardenHouse);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -48,7 +51,7 @@ public class GardenHouseController
             });
         }
 
-        return new OkResult();
+        return new CreatedResult("WoodenGarden", addedGardenHouse.Entity);
     }
 
     [HttpDelete("delete")]
@@ -86,6 +89,8 @@ public class GardenHouseController
     [HttpPatch("update")]
     public async Task<IActionResult> UpdateGardenHouse(int id, string? name, string? description)
     {
+        EntityEntry<GardenHouseModel> updatedGardenHouse;
+        
         if (id < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToUpdateNotProvided);
@@ -109,14 +114,14 @@ public class GardenHouseController
             gardenHouseToUpdate.Name = name;
         }
 
-        if (!description.IsNullOrWhiteSpace())
+        if (description is not null)
         {
             gardenHouseToUpdate.Description = description;
         }
 
         try
         {
-            _ = _dbContext.GardenHouseModels.Update(gardenHouseToUpdate);
+            updatedGardenHouse = _dbContext.GardenHouseModels.Update(gardenHouseToUpdate);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -128,7 +133,7 @@ public class GardenHouseController
             });
         }
 
-        return new OkResult();
+        return new OkObjectResult(updatedGardenHouse.Entity);
     }
 
     [HttpGet("findAll")]
