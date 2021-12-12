@@ -24,6 +24,8 @@ public class GardenHouseController
     [HttpPost("add")]
     public async Task<IActionResult> AddGardenHouse([FromBody] GardenHouseDTO gardenHouseDTO)
     {
+        EntityEntry<GardenHouseModel> addedGardenHouse;
+        
         if (gardenHouseDTO.Name.IsNullOrWhiteSpace())
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_NameIsEmpty);
@@ -37,7 +39,7 @@ public class GardenHouseController
 
         try
         {
-            _ = await _dbContext.GardenHouseModels!.AddAsync(gardenHouse);
+            addedGardenHouse = await _dbContext.GardenHouseModels!.AddAsync(gardenHouse);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -49,7 +51,7 @@ public class GardenHouseController
             });
         }
 
-        return new OkResult();
+        return new OkObjectResult(addedGardenHouse.Entity);
     }
 
     [HttpDelete("delete")]
