@@ -11,8 +11,8 @@ jobs:
       - uses: dev-drprasad/delete-older-releases@v0.2.0
         with:
           repo: Noweli/WoodenGarden
-          keep_latest: 3
-          delete_tag_pattern: v0.
+          keep_latest: 2
+          delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
