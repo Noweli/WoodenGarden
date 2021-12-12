@@ -19,9 +19,9 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Api_GardenHouseControllerUri" xml:space="preserve">
-        <value>api/gardenhouse</value>
+        <value>https://localhost:7053/api/gardenhouse</value>
     </data>
     <data name="Api_GardenHouseImageControllerUri" xml:space="preserve">
-        <value>api/gardenhouseimage</value>
+        <value>https://localhost:7053/api/gardenhouseimage</value>
     </data>
 </root>

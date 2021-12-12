@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace WoodenGardenFront.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -36,7 +39,7 @@ namespace WoodenGardenFront.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WoodenGardenApp.Client.Properties.ApiConstants", typeof(ApiConstants).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WoodenGardenFront.Properties.ApiConstants", typeof(ApiConstants).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,7 +61,7 @@ namespace WoodenGardenFront.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to api/gardenhouse.
+        ///   Looks up a localized string similar to https://localhost:7053/api/gardenhouse.
         /// </summary>
         internal static string Api_GardenHouseControllerUri {
             get {
@@ -67,7 +70,7 @@ namespace WoodenGardenFront.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to api/gardenhouseimage.
+        ///   Looks up a localized string similar to https://localhost:7053/api/gardenhouseimage.
         /// </summary>
         internal static string Api_GardenHouseImageControllerUri {
             get {
