@@ -51,7 +51,7 @@ public class GardenHouseController
             });
         }
 
-        return new OkObjectResult(addedGardenHouse.Entity);
+        return new CreatedResult("WoodenGarden", addedGardenHouse.Entity);
     }
 
     [HttpDelete("delete")]
