@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace WoodenGardenApp.Server.Models;
+namespace WoodenGardenServer.Models;
 
 public class ApplicationUser : IdentityUser
 {

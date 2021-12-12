@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WoodenGardenApp.Server.Models.Database.GardenHouse;
+using WoodenGardenServer.Models.Database.GardenHouse;
 
-namespace WoodenGardenApp.Server.Data;
+namespace WoodenGardenServer.Data;
 
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(
-        DbContextOptions options) : base(options)
+    public ApplicationDbContext(DbContextOptions options) : base(options)
     { }
 
     public DbSet<GardenHouseModel>? GardenHouseModels { get; set; }

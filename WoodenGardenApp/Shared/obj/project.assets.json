@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\WoodenGardenApp.Shared.csproj",
-      "projectName": "WoodenGardenApp.Shared",
-      "projectPath": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\WoodenGardenApp.Shared.csproj",
+      "projectUniqueName": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\Shared.csproj",
+      "projectName": "Shared",
+      "projectPath": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\Shared.csproj",
       "packagesPath": "C:\\Users\\Lemon\\.nuget\\packages\\",
       "outputPath": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\obj\\",
       "projectStyle": "PackageReference",
