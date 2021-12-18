@@ -56,8 +56,8 @@
 </div>
 
 @code {
-    private GardenHouseDTO? GardenHouseDTO { get; } = new GardenHouseDTO();
-    private BlazoredTextEditor? BlazoredTextEditor { get; set; }
+    private GardenHouseDTO? GardenHouseDTO { get; } = new();
+    private BlazoredTextEditor? BlazoredTextEditor { get; set; } = new();
     private string? DescriptionHTML { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -66,11 +66,13 @@
         {
             DescriptionHTML = GardenHouseDTO.Description ?? string.Empty;
         }
+        
         return Task.CompletedTask;
     }
 
-    private void AddGardenHouseToDatabase()
+    private async Task AddGardenHouseToDatabase()
     {
-        _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
+        GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
+        await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
     }
 }
