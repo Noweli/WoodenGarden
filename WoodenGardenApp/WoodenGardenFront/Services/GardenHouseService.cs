@@ -139,10 +139,14 @@ public class GardenHouseService : IGardenHouseService
                 {
                     return gardenHouses;
                 }
-                await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_CouldNotGatherHouses);
+                
+                await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_CouldNotGatherHouses); 
+                
                 return null;
-
             }
+
+            await _jsRuntime.ToastrError(
+                $"{ErrorMessages.Client_GardenHouseService_CouldNotGatherHouses}\nStatus code: {result.StatusCode}");
         }
         catch (Exception e)
         {
