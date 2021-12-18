@@ -71,7 +71,7 @@ public class FileUploadService : IFileUpload
         {
             File.Delete(path);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_FileNotDeletedError);
         }

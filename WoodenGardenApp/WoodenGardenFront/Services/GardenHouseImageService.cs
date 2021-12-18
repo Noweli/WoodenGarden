@@ -75,7 +75,7 @@ public class GardenHouseImageService : IGardenHouseImageService
                     $"{ErrorMessages.Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted} Status code: {response.StatusCode}");
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseImageService_DeleteImagesException);
         }
