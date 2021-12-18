@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WoodenGardenServer.Models.Database.GardenHouse
+namespace WoodenGardenApp.Shared.Models.Database.GardenHouse
 {
     public class GardenHouseImageModel
     {

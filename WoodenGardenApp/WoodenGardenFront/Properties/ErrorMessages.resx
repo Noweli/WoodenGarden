@@ -75,4 +75,10 @@
     <data name="Client_GardenHouseImageService_DeleteImagesException" xml:space="preserve">
         <value>Could not delete images. Error occured.</value>
     </data>
+    <data name="Client_GardenHouseService_CouldNotGatherHouses" xml:space="preserve">
+        <value>No garden houses found in database.</value>
+    </data>
+    <data name="Client_GardenHouseService_GetHousesError" xml:space="preserve">
+        <value>Could not get garden houses. Api error.</value>
+    </data>
 </root>

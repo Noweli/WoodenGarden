@@ -1,4 +1,5 @@
 ﻿using Microsoft.JSInterop;
+using Newtonsoft.Json;
 using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
 using WoodenGardenFront.Helpers.JsHelpers;
@@ -119,5 +120,35 @@ public class GardenHouseService : IGardenHouseService
         {
             await _jsRuntime.ToastrError($"{ErrorMessages.Client_GardenHouseService_HouseNotUpdated}\nException message: {e.Message}");
         }
+    }
+    
+    public async Task<IEnumerable<GardenHouseDTO>?> GetGardenHouses()
+    {
+        try
+        {
+            var requestUri = $"{ApiConstants.Api_GardenHouseControllerUri}/findAll";
+            var result =
+                await _httpClient.GetAsync(requestUri);
+
+            if (result.IsSuccessStatusCode)
+            {
+                var resultContent = await result.Content.ReadAsStringAsync();
+                var gardenHouses = JsonConvert.DeserializeObject<IEnumerable<GardenHouseDTO>>(resultContent);
+
+                if (gardenHouses is not null)
+                {
+                    return gardenHouses;
+                }
+                await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_CouldNotGatherHouses);
+                return null;
+
+            }
+        }
+        catch (Exception e)
+        {
+            await _jsRuntime.ToastrError($"{ErrorMessages.Client_GardenHouseService_GetHousesError}\nException message: {e.Message}");
+        }
+
+        return null;
     }
 }

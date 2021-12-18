@@ -1,6 +1,8 @@
 ﻿@page "/gardenhouses"
 @using WoodenGardenApp.Shared.DTOs
+@using WoodenGardenFront.Services.IServices
 @inject NavigationManager _navigationManager
+@inject IGardenHouseService _gardenHouseService
 
 <AuthorizeView>
     <div class="input-group bg-secondary border-dark shadow-sm p-2 mb-2">
@@ -11,28 +13,23 @@
 
 <div class="container">
     <div class="row row-cols-1 row-cols-sm2 row-cols-md-3 g-3">
-        <GardenHouse GardenHouseDTO="_gardenHouse" GardenHouseImages="_gardenHouseImage"/>
-        <GardenHouse/>
-        <GardenHouse/>
+        @if (GardenHousesList is not null)
+        {
+            foreach (var houseDTO in GardenHousesList)
+            {
+                <GardenHouse GardenHouseDTO="houseDTO"/>
+            }
+        }
     </div>
 </div>
 
 @code {
+    private IEnumerable<GardenHouseDTO>? GardenHousesList { get; set; }
 
-    private readonly GardenHouseDTO _gardenHouse = new GardenHouseDTO
+    protected override async Task OnInitializedAsync()
     {
-        Name = "TestName",
-        Description = "Test description to be shown"
-    };
-
-    private readonly GardenHouseImageDTO _gardenHouseImage = new GardenHouseImageDTO
-    {
-        ImageUrls = new List<string>
-        {
-            "images\\home\\carousel\\1.jpg",
-            "images\\home\\carousel\\2.jpg"
-        },
-    };
+        GardenHousesList = await _gardenHouseService.GetGardenHouses();
+    }
 
     private void NavigateToAddNewGardenHouse() => _navigationManager.NavigateTo("AddGardenHouse");
 }

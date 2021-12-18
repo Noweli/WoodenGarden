@@ -1,4 +1,4 @@
-﻿namespace WoodenGardenServer.Models.Api;
+﻿namespace WoodenGardenApp.Shared.Models.Api;
 
 public class ErrorModel
 {

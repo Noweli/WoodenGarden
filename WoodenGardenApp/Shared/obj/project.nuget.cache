@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ymZRXXqtY3JQP5NSG1wgrYkg0iVWaTzPEp6pvuF5N9et8weRSn74rQ4dNiRbj1BPeFIxlfSzxRxXGJkjxgwXvA==",
+  "dgSpecHash": "e2I/GooA3J46GarOyU5BK9g++aFZYBnRAltiWHmIUtG/WxQLCWf4UZMsAGtI1kJ02AOw76SumHXpCu9eetC+JA==",
   "success": true,
   "projectFilePath": "E:\\gitsource\\WoodenGarden\\WoodenGardenApp\\Shared\\Shared.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Lemon\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\Lemon\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Lemon\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }
