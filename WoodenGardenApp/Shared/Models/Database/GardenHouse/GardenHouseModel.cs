@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WoodenGardenServer.Models.Database.GardenHouse
+namespace WoodenGardenApp.Shared.Models.Database.GardenHouse
 {
     public class GardenHouseModel
     {

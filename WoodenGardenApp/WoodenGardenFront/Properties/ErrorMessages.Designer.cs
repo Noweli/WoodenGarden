@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace WoodenGardenFront.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -135,6 +138,24 @@ namespace WoodenGardenFront.Properties {
         internal static string Client_GardenHouseImageService_RoomIdNotProvided {
             get {
                 return ResourceManager.GetString("Client_GardenHouseImageService_RoomIdNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No garden houses found in database..
+        /// </summary>
+        internal static string Client_GardenHouseService_CouldNotGatherHouses {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseService_CouldNotGatherHouses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not get garden houses. Api error..
+        /// </summary>
+        internal static string Client_GardenHouseService_GetHousesError {
+            get {
+                return ResourceManager.GetString("Client_GardenHouseService_GetHousesError", resourceCulture);
             }
         }
         

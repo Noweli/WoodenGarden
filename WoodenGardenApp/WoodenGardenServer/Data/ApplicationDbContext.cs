@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WoodenGardenServer.Models.Database.GardenHouse;
+using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 
 namespace WoodenGardenServer.Data;
 

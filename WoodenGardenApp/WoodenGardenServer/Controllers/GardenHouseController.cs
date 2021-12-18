@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
+using WoodenGardenApp.Shared.Models.Api;
+using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 using WoodenGardenServer.Data;
-using WoodenGardenServer.Models.Api;
-using WoodenGardenServer.Models.Database.GardenHouse;
 using WoodenGardenServer.Properties;
 
 namespace WoodenGardenServer.Controllers;
@@ -15,10 +16,12 @@ namespace WoodenGardenServer.Controllers;
 public class GardenHouseController
 {
     private readonly ApplicationDbContext _dbContext;
+    private readonly IMapper _mapper;
 
-    public GardenHouseController(ApplicationDbContext dbContext)
+    public GardenHouseController(ApplicationDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
+        _mapper = mapper;
     }
 
     [HttpPost("add")]
@@ -137,11 +140,17 @@ public class GardenHouseController
     }
 
     [HttpGet("findAll")]
-    public async Task<ActionResult<List<GardenHouseModel>>> GetAllWoodenHouses()
+    public async Task<ActionResult<IEnumerable<GardenHouseDTO>>> GetAllWoodenHouses()
     {
         try
         {
-            return await _dbContext.GardenHouseModels!.Include(house => house.GardenHouseImages).ToListAsync();
+            var gardenHousesList = await _dbContext.GardenHouseModels!
+                .Include(house => house.GardenHouseImages).ToListAsync();
+
+            var gardenHouseDTOs = gardenHousesList.Select(house => _mapper.Map<GardenHouseModel, GardenHouseDTO>(house)).ToList();
+
+            return gardenHouseDTOs;
+
         }
         catch (Exception e)
         {

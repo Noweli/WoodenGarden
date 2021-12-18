@@ -1,4 +1,6 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using WoodenGardenApp.Shared.Mapper;
 using WoodenGardenServer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,8 @@ builder.Services.AddCors(options => options.AddPolicy("WoodenGarden", policyBuil
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
 
 var app = builder.Build();
 

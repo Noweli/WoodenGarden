@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WoodenGardenApp.Shared.Models.Api;
+using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 using WoodenGardenServer.Data;
-using WoodenGardenServer.Models.Api;
-using WoodenGardenServer.Models.Database.GardenHouse;
 using WoodenGardenServer.Properties;
 
 namespace WoodenGardenServer.Controllers;
