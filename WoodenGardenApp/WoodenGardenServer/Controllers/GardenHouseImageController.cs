@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WoodenGardenApp.Shared.Helpers;
 using WoodenGardenApp.Shared.Models.Api;
 using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 using WoodenGardenServer.Data;
@@ -17,30 +18,28 @@ public class GardenHouseImageController
         _dbContext = dbContext;
     }
 
-    [HttpPost("addimages")]
-    public async Task<IActionResult> AddImage(int roomId, List<string>? imageUrls)
+    [HttpPost("addimage")]
+    public async Task<IActionResult> AddImage(int roomId, string imageBase64)
     {
         if (roomId < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToAddImageNotProvided);
         }
 
-        if (imageUrls is null || !imageUrls.Any())
+        if (imageBase64.IsNullOrWhiteSpace())
         {
-            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImagesToAddNotProvided);
+            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImageBase64NotProvided);
         }
 
-        var imagesToAdd = new List<GardenHouseImageModel>();
-        
-        imageUrls.ForEach(imageUrl => imagesToAdd.Add(new GardenHouseImageModel
+        var imageToAdd = new GardenHouseImageModel
         {
             GardenHouseId = roomId,
-            ImageUrl = imageUrl
-        }));
+            ImageBase64 = imageBase64
+        };
 
         try
         {
-            await _dbContext.GardenHouseImageModels!.AddRangeAsync(imagesToAdd);
+            await _dbContext.GardenHouseImageModels!.AddAsync(imageToAdd);
             _ = _dbContext.SaveChangesAsync();
         }
         catch (Exception e)

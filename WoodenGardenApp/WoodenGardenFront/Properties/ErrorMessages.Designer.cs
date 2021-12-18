@@ -70,6 +70,15 @@ namespace WoodenGardenFront.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not upload file. File extension not supported..
+        /// </summary>
+        internal static string Client_FileUpload_FileExtensionNotSupported {
+            get {
+                return ResourceManager.GetString("Client_FileUpload_FileExtensionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not upload file. File name empty..
         /// </summary>
         internal static string Client_FileUpload_FileNameEmpty {
@@ -106,7 +115,7 @@ namespace WoodenGardenFront.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not delete images. Error occured..
+        ///   Looks up a localized string similar to Could not delete image. Error occured..
         /// </summary>
         internal static string Client_GardenHouseImageService_DeleteImagesException {
             get {
@@ -115,11 +124,11 @@ namespace WoodenGardenFront.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not add image. Image urls not provided..
+        ///   Looks up a localized string similar to Could not add image. Image not provided..
         /// </summary>
-        internal static string Client_GardenHouseImageService_ImageUrlsNotProvided {
+        internal static string Client_GardenHouseImageService_ImageBase64NotProvided {
             get {
-                return ResourceManager.GetString("Client_GardenHouseImageService_ImageUrlsNotProvided", resourceCulture);
+                return ResourceManager.GetString("Client_GardenHouseImageService_ImageBase64NotProvided", resourceCulture);
             }
         }
         

@@ -1,5 +1,6 @@
 ﻿using Microsoft.JSInterop;
 using WoodenGardenApp.Shared.DTOs;
+using WoodenGardenApp.Shared.Helpers;
 using WoodenGardenFront.Helpers.JsHelpers;
 using WoodenGardenFront.Helpers.ServiceHelpers;
 using WoodenGardenFront.Properties;
@@ -10,17 +11,15 @@ namespace WoodenGardenFront.Services;
 public class GardenHouseImageService : IGardenHouseImageService
 {
     private readonly HttpClient _httpClient;
-    private readonly IFileUpload _fileUpload;
     private readonly IJSRuntime _jsRuntime;
 
-    public GardenHouseImageService(HttpClient httpClient, IFileUpload fileUpload, IJSRuntime jsRuntime)
+    public GardenHouseImageService(HttpClient httpClient, IJSRuntime jsRuntime)
     {
         _httpClient = httpClient;
-        _fileUpload = fileUpload;
         _jsRuntime = jsRuntime;
     }
 
-    public async Task AddImage(int roomId, List<string>? imageUrls)
+    public async Task AddImage(int roomId, string imageBase64)
     {
         if (roomId < 0)
         {
@@ -28,16 +27,16 @@ public class GardenHouseImageService : IGardenHouseImageService
             return;
         }
 
-        if (imageUrls is null || !imageUrls.Any())
+        if (imageBase64.IsNullOrWhiteSpace())
         {
-            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseImageService_ImageUrlsNotProvided);
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseImageService_ImageBase64NotProvided);
             return;
         }
 
         var gardenHouseImageDTO = new GardenHouseImageDTO
         {
             RoomId = roomId,
-            ImageUrls = imageUrls
+            ImageBase64 = imageBase64
         };
 
         try
@@ -56,9 +55,9 @@ public class GardenHouseImageService : IGardenHouseImageService
         }
     }
 
-    public async Task DeleteImage(List<int>? imageId)
+    public async Task DeleteImage(int imageId)
     {
-        if (imageId is null || !imageId.Any())
+        if (imageId < 0)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_ImageIdsToDeleteNotProvided);
             return;

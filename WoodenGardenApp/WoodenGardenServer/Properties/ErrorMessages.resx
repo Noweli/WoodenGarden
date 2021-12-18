@@ -45,8 +45,8 @@
     <data name="ApiError_GardenHouseValidation_IdToAddImageNotProvided" xml:space="preserve">
         <value>Could not add image to garden house. Garden house id has to be provided.</value>
     </data>
-    <data name="ApiError_GardenHouseValidation_ImagesToAddNotProvided" xml:space="preserve">
-        <value>Could not add images to garden house. Images url not provided.</value>
+    <data name="ApiError_GardenHouseValidation_ImageBase64NotProvided" xml:space="preserve">
+        <value>Could not add image to garden house. Images not provided.</value>
     </data>
     <data name="ApiError_GardenHouse_AddImagesFailed" xml:space="preserve">
         <value>Could not add images to garden house. Database error.</value>

@@ -57,8 +57,8 @@
     <data name="Client_GardenHouseImageService_RoomIdNotProvided" xml:space="preserve">
         <value>Could not add image. Room id not provided.</value>
     </data>
-    <data name="Client_GardenHouseImageService_ImageUrlsNotProvided" xml:space="preserve">
-        <value>Could not add image. Image urls not provided.</value>
+    <data name="Client_GardenHouseImageService_ImageBase64NotProvided" xml:space="preserve">
+        <value>Could not add image. Image not provided.</value>
     </data>
     <data name="Client_GardenHouseImageService_ResponseErrorImageNotAdded" xml:space="preserve">
         <value>Could not add image. Api returned error.</value>
@@ -73,12 +73,15 @@
         <value>Could not delete images. Api error.</value>
     </data>
     <data name="Client_GardenHouseImageService_DeleteImagesException" xml:space="preserve">
-        <value>Could not delete images. Error occured.</value>
+        <value>Could not delete image. Error occured.</value>
     </data>
     <data name="Client_GardenHouseService_CouldNotGatherHouses" xml:space="preserve">
         <value>No garden houses found in database.</value>
     </data>
     <data name="Client_GardenHouseService_GetHousesError" xml:space="preserve">
         <value>Could not get garden houses. Api error.</value>
+    </data>
+    <data name="Client_FileUpload_FileExtensionNotSupported" xml:space="preserve">
+        <value>Could not upload file. File extension not supported.</value>
     </data>
 </root>

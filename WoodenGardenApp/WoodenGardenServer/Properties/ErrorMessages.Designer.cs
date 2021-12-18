@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace WoodenGardenServer.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -157,20 +160,20 @@ namespace WoodenGardenServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not add image to garden house. Images not provided..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_ImageBase64NotProvided {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImageBase64NotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not delete images from garden house. Ids not provided..
         /// </summary>
         internal static string ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided {
             get {
                 return ResourceManager.GetString("ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not add images to garden house. Images url not provided..
-        /// </summary>
-        internal static string ApiError_GardenHouseValidation_ImagesToAddNotProvided {
-            get {
-                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImagesToAddNotProvided", resourceCulture);
             }
         }
         
