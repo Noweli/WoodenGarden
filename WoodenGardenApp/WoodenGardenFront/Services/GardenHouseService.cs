@@ -20,12 +20,12 @@ public class GardenHouseService : IGardenHouseService
         _jsRuntime = jsRuntime;
     }
 
-    public async Task AddGardenHouse(string? name, string? description)
+    public async Task<int> AddGardenHouse(string? name, string? description)
     {
         if (name.IsNullOrWhiteSpace())
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseNameNotProvided);
-            return;
+            return 0;
         }
 
         var gardenHouseDTO = new GardenHouseDTO
@@ -41,8 +41,11 @@ public class GardenHouseService : IGardenHouseService
 
             if (result.IsSuccessStatusCode)
             {
+                var resultContent = result.Content.ToString() ?? string.Empty;
+                var resultHouse = JsonConvert.DeserializeObject<GardenHouseDTO>(resultContent);
+                
                 await _jsRuntime.ToastrSuccess(Messages.Client_GardenHouseService_HouseAdded);
-                return;
+                return resultHouse?.Id ?? 0;
             }
 
             await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_HouseNotAdded);
@@ -51,6 +54,8 @@ public class GardenHouseService : IGardenHouseService
         {
             await _jsRuntime.ToastrError($"{ErrorMessages.Client_GardenHouseService_HouseNotAdded}\nException message: {e.Message}");
         }
+
+        return 0;
     }
 
     public async Task DeleteGardenHouse(int id)
