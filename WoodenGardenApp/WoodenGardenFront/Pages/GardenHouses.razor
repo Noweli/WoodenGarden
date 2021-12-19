@@ -1,13 +1,13 @@
 ﻿@page "/gardenhouses"
-@using WoodenGardenApp.Shared.DTOs
 @using WoodenGardenFront.Services.IServices
+@using WoodenGardenApp.Shared.DTOs
 @inject NavigationManager _navigationManager
 @inject IGardenHouseService _gardenHouseService
 
 <AuthorizeView>
     <div class="input-group bg-secondary border-dark shadow-sm p-2 mb-2">
         <p class="text-danger m-2 fw-bold">Admin options: </p>
-        <btn class="btn btn-outline-success" @onclick="NavigateToAddNewGardenHouse">Add new</btn>
+        <btn class="btn btn-outline-light" @onclick="NavigateToAddNewGardenHouse">Add new</btn>
     </div>
 </AuthorizeView>
 

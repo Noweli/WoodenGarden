@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using WoodenGardenApp.Shared.DTOs;
+using WoodenGardenApp.Shared.Helpers;
 using WoodenGardenApp.Shared.Models.Api;
 using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 using WoodenGardenServer.Data;
@@ -11,37 +14,33 @@ namespace WoodenGardenServer.Controllers;
 public class GardenHouseImageController
 {
     private readonly ApplicationDbContext _dbContext;
+    private readonly IMapper _mapper;
 
-    public GardenHouseImageController(ApplicationDbContext dbContext)
+    public GardenHouseImageController(ApplicationDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
+        _mapper = mapper;
     }
 
-    [HttpPost("addimages")]
-    public async Task<IActionResult> AddImage(int roomId, List<string>? imageUrls)
+    [HttpPost("addimage")]
+    public async Task<IActionResult> AddImage([FromBody] GardenHouseImageDTO gardenHouseImageDTO)
     {
-        if (roomId < 0)
+        if (gardenHouseImageDTO.RoomId < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToAddImageNotProvided);
         }
 
-        if (imageUrls is null || !imageUrls.Any())
+        if (gardenHouseImageDTO.ImageBase64.IsNullOrWhiteSpace())
         {
-            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImagesToAddNotProvided);
+            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImageBase64NotProvided);
         }
 
-        var imagesToAdd = new List<GardenHouseImageModel>();
+        var imageToAdd = _mapper.Map<GardenHouseImageDTO, GardenHouseImageModel>(gardenHouseImageDTO);
         
-        imageUrls.ForEach(imageUrl => imagesToAdd.Add(new GardenHouseImageModel
-        {
-            GardenHouseId = roomId,
-            ImageUrl = imageUrl
-        }));
-
         try
         {
-            await _dbContext.GardenHouseImageModels!.AddRangeAsync(imagesToAdd);
-            _ = _dbContext.SaveChangesAsync();
+            _ = await _dbContext.GardenHouseImageModels!.AddAsync(imageToAdd);
+            _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
         {

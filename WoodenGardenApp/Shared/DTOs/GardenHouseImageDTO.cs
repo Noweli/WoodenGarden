@@ -3,5 +3,5 @@
 public class GardenHouseImageDTO
 {
     public int RoomId { get; set; }
-    public List<string>? ImageUrls { get; set; }
+    public string? ImageBase64 { get; set; }
 }

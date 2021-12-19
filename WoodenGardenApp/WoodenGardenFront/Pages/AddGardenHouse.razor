@@ -1,8 +1,12 @@
 ﻿@page "/AddGardenHouse"
+@using WoodenGardenFront.Helpers.JsHelpers
+@using WoodenGardenFront.Properties
 @using WoodenGardenFront.Services.IServices
 @using WoodenGardenApp.Shared.DTOs
 @using Blazored.TextEditor
 @inject IGardenHouseService _gardenHouseService
+@inject IGardenHouseImageService _gardenHouseImageService
+@inject IJSRuntime _jsRuntime
 
 <div class="container align-self-center mt-2 border-dark border-2 bg-light">
     <EditForm Model="@GardenHouseDTO" OnValidSubmit="AddGardenHouseToDatabase">
@@ -48,6 +52,17 @@
             </BlazoredTextEditor>
         </div>
         
+        <div class="form-group" style="padding-top: 70px;">
+            <InputFile OnChange="HandleImageUpload" multiple class="btn btn-secondary"/>
+            
+            <div class="row">
+                @if (GardenHouseDTO is not null || GardenHouseDTO!.Images!.Any())
+                {
+                    
+                }
+            </div>
+        </div>
+        
         <div class="form-group">
             <button class="btn btn-primary">Add room</button>
             <NavLink href="gardenhouses" class="btn btn-outline-info">Back</NavLink>
@@ -58,6 +73,7 @@
 @code {
     private GardenHouseDTO? GardenHouseDTO { get; } = new();
     private BlazoredTextEditor? BlazoredTextEditor { get; set; } = new();
+    private List<string> ImagesInBase64ToBeAdded { get; set; } = new();
     private string? DescriptionHTML { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -73,6 +89,46 @@
     private async Task AddGardenHouseToDatabase()
     {
         GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
-        await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
+        var addedHouseId = await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
+
+        foreach (var image in ImagesInBase64ToBeAdded)
+        {
+            await _gardenHouseImageService.AddImage(addedHouseId, image);
+        }
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs args)
+    {
+        try
+        {
+            if (args.GetMultipleFiles().Count == 0)
+            {
+                return;
+            }
+
+            foreach (var file in args.GetMultipleFiles())
+            {
+                var fileInfo = new FileInfo(file.Name);
+
+                if (!(fileInfo.Extension.Equals(".jgp", StringComparison.OrdinalIgnoreCase) ||
+                      fileInfo.Extension.Equals(".png", StringComparison.OrdinalIgnoreCase) ||
+                      fileInfo.Extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                      fileInfo.Extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase)))
+                {
+                    await _jsRuntime.ToastrError($"{ErrorMessages.Client_FileUpload_FileExtensionNotSupported}\nImage: {fileInfo.Name}");
+                    continue;
+                }
+
+                var memoryStream = new MemoryStream();
+                await file.OpenReadStream().CopyToAsync(memoryStream);
+
+                var imageBase64 = Convert.ToBase64String(memoryStream.ToArray());
+                ImagesInBase64ToBeAdded.Add(imageBase64);
+            }
+        }
+        catch (Exception)
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_FileNotAdded);
+        }
     }
 }

@@ -145,7 +145,7 @@ public class GardenHouseController
         try
         {
             var gardenHousesList = await _dbContext.GardenHouseModels!
-                .Include(house => house.GardenHouseImages).ToListAsync();
+                .Include(model => model.GardenHouseImages).ToListAsync();
 
             var gardenHouseDTOs = gardenHousesList.Select(house => _mapper.Map<GardenHouseModel, GardenHouseDTO>(house)).ToList();
 
