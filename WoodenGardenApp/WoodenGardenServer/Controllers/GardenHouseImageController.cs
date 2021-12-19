@@ -39,8 +39,8 @@ public class GardenHouseImageController
         
         try
         {
-            var addedImage = await _dbContext.GardenHouseImageModels!.AddAsync(imageToAdd);
-            _ = _dbContext.SaveChangesAsync();
+            _ = await _dbContext.GardenHouseImageModels!.AddAsync(imageToAdd);
+            _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
         {
