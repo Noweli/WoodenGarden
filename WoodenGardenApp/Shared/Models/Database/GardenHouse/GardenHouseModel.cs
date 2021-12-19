@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace WoodenGardenApp.Shared.Models.Database.GardenHouse
 {
@@ -9,6 +10,6 @@ namespace WoodenGardenApp.Shared.Models.Database.GardenHouse
         [Required] 
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public virtual List<GardenHouseImageModel>? GardenHouseImages { get; set; }
+        public virtual ICollection? GardenHouseImages { get; set; }
     }
 }
