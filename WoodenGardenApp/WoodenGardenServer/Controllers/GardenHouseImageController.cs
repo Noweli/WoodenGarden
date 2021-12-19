@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
 using WoodenGardenApp.Shared.Models.Api;
 using WoodenGardenApp.Shared.Models.Database.GardenHouse;
@@ -12,34 +14,32 @@ namespace WoodenGardenServer.Controllers;
 public class GardenHouseImageController
 {
     private readonly ApplicationDbContext _dbContext;
+    private readonly IMapper _mapper;
 
-    public GardenHouseImageController(ApplicationDbContext dbContext)
+    public GardenHouseImageController(ApplicationDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
+        _mapper = mapper;
     }
 
     [HttpPost("addimage")]
-    public async Task<IActionResult> AddImage(int roomId, string imageBase64)
+    public async Task<IActionResult> AddImage([FromBody] GardenHouseImageDTO gardenHouseImageDTO)
     {
-        if (roomId < 0)
+        if (gardenHouseImageDTO.RoomId < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToAddImageNotProvided);
         }
 
-        if (imageBase64.IsNullOrWhiteSpace())
+        if (gardenHouseImageDTO.ImageBase64.IsNullOrWhiteSpace())
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImageBase64NotProvided);
         }
 
-        var imageToAdd = new GardenHouseImageModel
-        {
-            GardenHouseId = roomId,
-            ImageBase64 = imageBase64
-        };
-
+        var imageToAdd = _mapper.Map<GardenHouseImageDTO, GardenHouseImageModel>(gardenHouseImageDTO);
+        
         try
         {
-            await _dbContext.GardenHouseImageModels!.AddAsync(imageToAdd);
+            var addedImage = await _dbContext.GardenHouseImageModels!.AddAsync(imageToAdd);
             _ = _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
