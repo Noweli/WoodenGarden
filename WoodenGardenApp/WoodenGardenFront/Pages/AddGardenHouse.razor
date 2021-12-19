@@ -73,6 +73,7 @@
 @code {
     private GardenHouseDTO? GardenHouseDTO { get; } = new();
     private BlazoredTextEditor? BlazoredTextEditor { get; set; } = new();
+    private List<string> ImagesInBase64ToBeAdded { get; set; } = new();
     private string? DescriptionHTML { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -88,7 +89,12 @@
     private async Task AddGardenHouseToDatabase()
     {
         GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
-        await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
+        var addedHouseId = await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
+
+        foreach (var image in ImagesInBase64ToBeAdded)
+        {
+            await _gardenHouseImageService.AddImage(addedHouseId, image);
+        }
     }
 
     private async Task HandleImageUpload(InputFileChangeEventArgs args)
@@ -117,12 +123,12 @@
                 await file.OpenReadStream().CopyToAsync(memoryStream);
 
                 var imageBase64 = Convert.ToBase64String(memoryStream.ToArray());
-                await _gardenHouseImageService.AddImage(GardenHouseDTO!.Id, imageBase64);
+                ImagesInBase64ToBeAdded.Add(imageBase64);
             }
         }
         catch (Exception)
         {
-            
+            await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_FileNotAdded);
         }
     }
 }

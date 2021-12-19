@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
+using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 using WoodenGardenFront.Helpers.JsHelpers;
 using WoodenGardenFront.Helpers.ServiceHelpers;
 using WoodenGardenFront.Properties;
@@ -41,8 +42,8 @@ public class GardenHouseService : IGardenHouseService
 
             if (result.IsSuccessStatusCode)
             {
-                var resultContent = result.Content.ToString() ?? string.Empty;
-                var resultHouse = JsonConvert.DeserializeObject<GardenHouseDTO>(resultContent);
+                var resultContent = await result.Content.ReadAsStringAsync();
+                var resultHouse = JsonConvert.DeserializeObject<GardenHouseModel>(resultContent);
                 
                 await _jsRuntime.ToastrSuccess(Messages.Client_GardenHouseService_HouseAdded);
                 return resultHouse?.Id ?? 0;

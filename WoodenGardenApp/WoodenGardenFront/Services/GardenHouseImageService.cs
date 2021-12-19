@@ -42,7 +42,7 @@ public class GardenHouseImageService : IGardenHouseImageService
         try
         {
             var stringContent = gardenHouseImageDTO.GetStringContentAppJson();
-            var response = await _httpClient.PostAsync($"{ApiConstants.Api_GardenHouseImageControllerUri}/addimages", stringContent);
+            var response = await _httpClient.PostAsync($"{ApiConstants.Api_GardenHouseImageControllerUri}/addimage", stringContent);
 
             if (!response.IsSuccessStatusCode)
             {
