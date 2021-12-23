@@ -6,9 +6,9 @@ namespace WoodenGardenApp.Shared.Models.Database.GardenHouse
     {
         public int Id { get; set; }
         public int GardenHouseId { get; set; }
-        public string? ImageBase64 { get; set; }
+        public string? ImagePath { get; set; }
         
-        [ForeignKey("GardenHouseId")] 
+        [ForeignKey("GardenHouseId")]
         public virtual GardenHouseModel? GardenHouse { get; set; }
     }
 }
