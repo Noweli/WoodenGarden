@@ -19,7 +19,7 @@ public class GardenHouseImageService : IGardenHouseImageService
         _jsRuntime = jsRuntime;
     }
 
-    public async Task AddImage(int roomId, string imageBase64)
+    public async Task AddImage(int roomId, string imagePath)
     {
         if (roomId < 0)
         {
@@ -27,16 +27,16 @@ public class GardenHouseImageService : IGardenHouseImageService
             return;
         }
 
-        if (imageBase64.IsNullOrWhiteSpace())
+        if (imagePath.IsNullOrWhiteSpace())
         {
-            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseImageService_ImageBase64NotProvided);
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseImageService_ImagePathNotProvided);
             return;
         }
 
         var gardenHouseImageDTO = new GardenHouseImageDTO
         {
             RoomId = roomId,
-            ImageBase64 = imageBase64
+            ImagePath = imagePath
         };
 
         try
