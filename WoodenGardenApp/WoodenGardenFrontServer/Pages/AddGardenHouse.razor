@@ -1,12 +1,14 @@
 ﻿@page "/AddGardenHouse"
 @using WoodenGardenFront.Helpers.JsHelpers
 @using WoodenGardenFront.Properties
-@using WoodenGardenFront.Services.IServices
 @using WoodenGardenApp.Shared.DTOs
 @using Blazored.TextEditor
+@using WoodenGardenFrontServer.Services.IServices
 @inject IGardenHouseService _gardenHouseService
 @inject IGardenHouseImageService _gardenHouseImageService
+@inject IImageHandlingService _imageHandlingService
 @inject IJSRuntime _jsRuntime
+@inject NavigationManager _navigationManager
 
 <div class="container align-self-center mt-2 border-dark border-2 bg-light">
     <EditForm Model="@GardenHouseDTO" OnValidSubmit="AddGardenHouseToDatabase">
@@ -73,7 +75,7 @@
 @code {
     private GardenHouseDTO? GardenHouseDTO { get; } = new();
     private BlazoredTextEditor? BlazoredTextEditor { get; set; } = new();
-    private List<string> ImagesInBase64ToBeAdded { get; set; } = new();
+    private List<IBrowserFile> ImagesToBeAdded { get; set; } = new();
     private string? DescriptionHTML { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -90,11 +92,19 @@
     {
         GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
         var addedHouseId = await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
-
-        foreach (var image in ImagesInBase64ToBeAdded)
+        
+        var savedImageFiles = new List<string>();
+        foreach (var image in ImagesToBeAdded)
         {
-            await _gardenHouseImageService.AddImage(addedHouseId, image);
+            savedImageFiles.Add(await _imageHandlingService.SaveImage(image));
         }
+
+        foreach (var imagePath in savedImageFiles)
+        {
+            await _gardenHouseImageService.AddImage(addedHouseId, imagePath);
+        }
+
+        _navigationManager.NavigateTo("gardenhouses");
     }
 
     private async Task HandleImageUpload(InputFileChangeEventArgs args)
@@ -118,12 +128,8 @@
                     await _jsRuntime.ToastrError($"{ErrorMessages.Client_FileUpload_FileExtensionNotSupported}\nImage: {fileInfo.Name}");
                     continue;
                 }
-
-                var memoryStream = new MemoryStream();
-                await file.OpenReadStream().CopyToAsync(memoryStream);
-
-                var imageBase64 = Convert.ToBase64String(memoryStream.ToArray());
-                ImagesInBase64ToBeAdded.Add(imageBase64);
+                
+                ImagesToBeAdded.Add(file);
             }
         }
         catch (Exception)

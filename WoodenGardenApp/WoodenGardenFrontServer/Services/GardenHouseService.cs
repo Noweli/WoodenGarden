@@ -6,9 +6,9 @@ using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 using WoodenGardenFront.Helpers.JsHelpers;
 using WoodenGardenFront.Helpers.ServiceHelpers;
 using WoodenGardenFront.Properties;
-using WoodenGardenFront.Services.IServices;
+using WoodenGardenFrontServer.Services.IServices;
 
-namespace WoodenGardenFront.Services;
+namespace WoodenGardenFrontServer.Services;
 
 public class GardenHouseService : IGardenHouseService
 {

@@ -30,9 +30,9 @@ public class GardenHouseImageController
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToAddImageNotProvided);
         }
 
-        if (gardenHouseImageDTO.ImageBase64.IsNullOrWhiteSpace())
+        if (gardenHouseImageDTO.ImagePath.IsNullOrWhiteSpace())
         {
-            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImageBase64NotProvided);
+            return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImagePathNotProvided);
         }
 
         var imageToAdd = _mapper.Map<GardenHouseImageDTO, GardenHouseImageModel>(gardenHouseImageDTO);

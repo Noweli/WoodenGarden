@@ -39,7 +39,7 @@ namespace WoodenGardenFront.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WoodenGardenFront.Properties.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WoodenGardenFrontServer.Properties.ErrorMessages", typeof(ErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -124,11 +124,11 @@ namespace WoodenGardenFront.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not add image. Image not provided..
+        ///   Looks up a localized string similar to Could not add image. Image path not provided..
         /// </summary>
-        internal static string Client_GardenHouseImageService_ImageBase64NotProvided {
+        internal static string Client_GardenHouseImageService_ImagePathNotProvided {
             get {
-                return ResourceManager.GetString("Client_GardenHouseImageService_ImageBase64NotProvided", resourceCulture);
+                return ResourceManager.GetString("Client_GardenHouseImageService_ImagePathNotProvided", resourceCulture);
             }
         }
         

@@ -160,20 +160,20 @@ namespace WoodenGardenServer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not add image to garden house. Images not provided..
-        /// </summary>
-        internal static string ApiError_GardenHouseValidation_ImageBase64NotProvided {
-            get {
-                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImageBase64NotProvided", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Could not delete images from garden house. Ids not provided..
         /// </summary>
         internal static string ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided {
             get {
                 return ResourceManager.GetString("ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add image to garden house. Image paths not provided..
+        /// </summary>
+        internal static string ApiError_GardenHouseValidation_ImagePathNotProvided {
+            get {
+                return ResourceManager.GetString("ApiError_GardenHouseValidation_ImagePathNotProvided", resourceCulture);
             }
         }
         

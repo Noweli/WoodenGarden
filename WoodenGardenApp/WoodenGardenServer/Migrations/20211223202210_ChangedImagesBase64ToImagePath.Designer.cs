@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodenGardenServer.Data;
 
@@ -10,9 +11,10 @@ using WoodenGardenServer.Data;
 namespace WoodenGardenServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211223202210_ChangedImagesBase64ToImagePath")]
+    partial class ChangedImagesBase64ToImagePath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,17 +67,12 @@ namespace WoodenGardenServer.Migrations
             modelBuilder.Entity("WoodenGardenApp.Shared.Models.Database.GardenHouse.GardenHouseImageModel", b =>
                 {
                     b.HasOne("WoodenGardenApp.Shared.Models.Database.GardenHouse.GardenHouseModel", "GardenHouse")
-                        .WithMany("GardenHouseImages")
+                        .WithMany()
                         .HasForeignKey("GardenHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("GardenHouse");
-                });
-
-            modelBuilder.Entity("WoodenGardenApp.Shared.Models.Database.GardenHouse.GardenHouseModel", b =>
-                {
-                    b.Navigation("GardenHouseImages");
                 });
 #pragma warning restore 612, 618
         }

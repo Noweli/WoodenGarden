@@ -1,4 +1,4 @@
-﻿namespace WoodenGardenFront.Services.IServices;
+﻿namespace WoodenGardenFrontServer.Services.IServices;
 
 public interface IGardenHouseImageService
 {
