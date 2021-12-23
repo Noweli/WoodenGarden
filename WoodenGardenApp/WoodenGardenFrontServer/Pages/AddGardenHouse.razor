@@ -1,16 +1,14 @@
 ﻿@page "/AddGardenHouse"
 @using WoodenGardenFront.Helpers.JsHelpers
 @using WoodenGardenFront.Properties
-@using WoodenGardenFront.Services.IServices
 @using WoodenGardenApp.Shared.DTOs
 @using Blazored.TextEditor
-@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using WoodenGardenFrontServer.Services.IServices
 @inject IGardenHouseService _gardenHouseService
 @inject IGardenHouseImageService _gardenHouseImageService
 @inject IImageHandlingService _imageHandlingService
 @inject IJSRuntime _jsRuntime
 @inject NavigationManager _navigationManager
-@inject IWebAssemblyHostEnvironment _hostEnvironment
 
 <div class="container align-self-center mt-2 border-dark border-2 bg-light">
     <EditForm Model="@GardenHouseDTO" OnValidSubmit="AddGardenHouseToDatabase">

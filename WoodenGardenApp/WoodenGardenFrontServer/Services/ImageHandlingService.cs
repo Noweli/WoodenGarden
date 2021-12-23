@@ -2,9 +2,9 @@
 using Microsoft.JSInterop;
 using WoodenGardenFront.Helpers.JsHelpers;
 using WoodenGardenFront.Properties;
-using WoodenGardenFront.Services.IServices;
+using WoodenGardenFrontServer.Services.IServices;
 
-namespace WoodenGardenFront.Services;
+namespace WoodenGardenFrontServer.Services;
 
 public class ImageHandlingService : IImageHandlingService
 {

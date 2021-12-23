@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Client_ToastrHelper_MessageNotProvided" xml:space="preserve">
+        <value>Message has to be provided in toastr.</value>
+    </data>
+    <data name="Client_GardenHouseService_HouseNameNotProvided" xml:space="preserve">
+        <value>Garden house name has to be provided.</value>
+    </data>
+    <data name="Client_GardenHouseService_HouseNotAdded" xml:space="preserve">
+        <value>Could not add garden house. Api communication error.</value>
+    </data>
+    <data name="Client_GardenHouseService_HouseIdNotProvided" xml:space="preserve">
+        <value>Garden house id has to be provided correctly.</value>
+    </data>
+    <data name="Client_GardenHouseService_HouseNotDeleted" xml:space="preserve">
+        <value>Could not delete garden house. Api communication error.</value>
+    </data>
+    <data name="Client_GardenHouseService_NameAndDescriptionToUpdateNotProvided" xml:space="preserve">
+        <value>Could not update garden house. Either new name or new description have to be provided.</value>
+    </data>
+    <data name="Client_GardenHouseService_HouseNotUpdated" xml:space="preserve">
+        <value>Could not update garden house. Api communication error.</value>
+    </data>
+    <data name="Client_FileUpload_FileNotAdded" xml:space="preserve">
+        <value>Could not upload file. Error occured while saving.</value>
+    </data>
+    <data name="Client_FileUpload_FileNameEmpty" xml:space="preserve">
+        <value>Could not upload file. File name empty.</value>
+    </data>
+    <data name="Client_FileUpload_DeleteFileNameEmpty" xml:space="preserve">
+        <value>Could not delete file. File name empty.</value>
+    </data>
+    <data name="Client_FileUpload_FileToDeleteNotExists" xml:space="preserve">
+        <value>Could not delete file. File not exists.</value>
+    </data>
+    <data name="Client_FileUpload_FileNotDeletedError" xml:space="preserve">
+        <value>Could not delete file. Error occured while removing file.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_RoomIdNotProvided" xml:space="preserve">
+        <value>Could not add image. Room id not provided.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_ImagePathNotProvided" xml:space="preserve">
+        <value>Could not add image. Image path not provided.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_ResponseErrorImageNotAdded" xml:space="preserve">
+        <value>Could not add image. Api returned error.</value>
+    </data>
+    <data name="Client_GardenHouseServiceImage_ImageNotAddedException" xml:space="preserve">
+        <value>Could not add image. Error occured.</value>
+    </data>
+    <data name="Client_GardenHouseService_ImageIdsToDeleteNotProvided" xml:space="preserve">
+        <value>Could not delete images. Ids not provided.</value>
+    </data>
+    <data name="Client_GardenHouseServiceImage_ApiErrorImagesNotDeleted" xml:space="preserve">
+        <value>Could not delete images. Api error.</value>
+    </data>
+    <data name="Client_GardenHouseImageService_DeleteImagesException" xml:space="preserve">
+        <value>Could not delete image. Error occured.</value>
+    </data>
+    <data name="Client_GardenHouseService_CouldNotGatherHouses" xml:space="preserve">
+        <value>No garden houses found in database.</value>
+    </data>
+    <data name="Client_GardenHouseService_GetHousesError" xml:space="preserve">
+        <value>Could not get garden houses. Api error.</value>
+    </data>
+    <data name="Client_FileUpload_FileExtensionNotSupported" xml:space="preserve">
+        <value>Could not upload file. File extension not supported.</value>
+    </data>
+</root>
