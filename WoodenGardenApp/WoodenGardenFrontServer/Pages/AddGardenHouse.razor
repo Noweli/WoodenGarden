@@ -1,14 +1,19 @@
 ﻿@page "/AddGardenHouse"
+@page "/AddGardenHouse/{Id:int}"
+
 @using WoodenGardenFront.Helpers.JsHelpers
 @using WoodenGardenFront.Properties
 @using WoodenGardenApp.Shared.DTOs
 @using Blazored.TextEditor
+@using WoodenGardenFrontServer.Properties
 @using WoodenGardenFrontServer.Services.IServices
 @inject IGardenHouseService _gardenHouseService
 @inject IGardenHouseImageService _gardenHouseImageService
 @inject IImageHandlingService _imageHandlingService
 @inject IJSRuntime _jsRuntime
 @inject NavigationManager _navigationManager
+
+<h3>@(IsEditMode ? "Edit" : "Create") mode</h3>
 
 <div class="container align-self-center mt-2 border-dark border-2 bg-light">
     <EditForm Model="@GardenHouseDTO" OnValidSubmit="AddGardenHouseToDatabase">
@@ -54,6 +59,21 @@
             </BlazoredTextEditor>
         </div>
         
+        <div class="row">
+            @if (GardenHouseDTO is not null && GardenHouseDTO!.GardenHouseImages is not null && GardenHouseDTO!.GardenHouseImages!.Any())
+            {
+                var images = GardenHouseDTO!.GardenHouseImages!.Select(image => image.ImagePath).ToList();
+                @for (var index = 0; index < images.Count; index++)
+                {
+                    var imagePath = Path.Combine(SettingsConstants.ImagesFolder, images[index] ?? string.Empty);
+                    <div class="col-md-2 mt-3">
+                        <img class="d-block w-100" src="@imagePath" alt="Home photo">
+                        <button type="button" class="btn btn-outline-danger btn-block mt-3">Delete</button>
+                    </div>
+                }
+            }
+        </div>
+        
         <div class="form-group" style="padding-top: 70px;">
             <InputFile OnChange="HandleImageUpload" multiple class="btn btn-secondary"/>
             
@@ -73,19 +93,36 @@
 </div>
 
 @code {
-    private GardenHouseDTO? GardenHouseDTO { get; } = new();
+    [Parameter]
+    public int? Id { get; set; }
+    
+    private GardenHouseDTO? GardenHouseDTO { get; set; } = new();
     private BlazoredTextEditor? BlazoredTextEditor { get; set; } = new();
-    private List<IBrowserFile> ImagesToBeAdded { get; set; } = new();
+    private List<IBrowserFile> HouseImages { get; } = new();
     private string? DescriptionHTML { get; set; }
+    private bool IsEditMode { get; set; }
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        if (GardenHouseDTO is not null)
+        if (Id is not null)
         {
-            DescriptionHTML = GardenHouseDTO.Description ?? string.Empty;
+            IsEditMode = true;
+            await LoadGardenHouseIfEdit();
+        }
+    }
+
+    private async Task LoadGardenHouseIfEdit()
+    {
+        var gardenHouses = await _gardenHouseService.GetGardenHouses();
+        GardenHouseDTO = gardenHouses!.FirstOrDefault(gardenHouse => gardenHouse.Id == Id);
+
+        if (GardenHouseDTO is null)
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_GetHousesError);
+            return;
         }
         
-        return Task.CompletedTask;
+        DescriptionHTML = GardenHouseDTO.Description ?? string.Empty;
     }
 
     private async Task AddGardenHouseToDatabase()
@@ -94,7 +131,7 @@
         var addedHouseId = await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
         
         var savedImageFiles = new List<string>();
-        foreach (var image in ImagesToBeAdded)
+        foreach (var image in HouseImages)
         {
             savedImageFiles.Add(await _imageHandlingService.SaveImage(image));
         }
@@ -129,7 +166,7 @@
                     continue;
                 }
                 
-                ImagesToBeAdded.Add(file);
+                HouseImages.Add(file);
             }
         }
         catch (Exception)
