@@ -9,17 +9,19 @@ namespace WoodenGardenFrontServer.Services;
 public class ImageHandlingService : IImageHandlingService
 {
     private readonly IJSRuntime _jsRuntime;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public ImageHandlingService(IJSRuntime jsRuntime)
+    public ImageHandlingService(IJSRuntime jsRuntime, IWebHostEnvironment webHostEnvironment)
     {
         _jsRuntime = jsRuntime;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     public async Task<string> SaveImage(IBrowserFile image)
     {
         var fileInfo = new FileInfo(image.Name);
         var fileNameGuid = Guid.NewGuid() + fileInfo.Extension;
-        var imagesDirectory = Path.Combine("/wwwroot/images", "home");
+        var imagesDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "images", "home");
         var filePath = Path.Combine(imagesDirectory, fileNameGuid);
 
         try
@@ -43,7 +45,7 @@ public class ImageHandlingService : IImageHandlingService
             return string.Empty;
         }
 
-        return filePath;
+        return fileNameGuid;
     }
 
     public async Task<bool> DeleteImage(string imagePath)
