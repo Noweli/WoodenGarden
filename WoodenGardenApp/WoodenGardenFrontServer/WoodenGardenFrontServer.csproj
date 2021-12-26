@@ -19,6 +19,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Messages.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Properties\SettingsConstants.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SettingsConstants.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -37,6 +41,11 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Messages.resx</DependentUpon>
       </Compile>
+      <Compile Update="Properties\SettingsConstants.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SettingsConstants.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -45,6 +54,7 @@
 
     <ItemGroup>
       <PackageReference Include="Blazored.TextEditor" Version="1.0.7" />
+      <PackageReference Include="BlazorStrap" Version="1.5.1" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 

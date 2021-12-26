@@ -1,7 +1,7 @@
 ﻿@using WoodenGardenApp.Shared.DTOs
 <div class="col">
     <div class="card shadow-sm">
-        <!-- Carousel here -->
+        <ImagesCarousel ImageNames="_gardenHouseImages"></ImagesCarousel>
         <div class="card-body">
             <p class="card-title">
                 <b>@GardenHouseDTO?.Name</b>
@@ -20,6 +20,15 @@
 
     [Parameter]
     public GardenHouseDTO? GardenHouseDTO { get; set; }
+
+    private List<string?>? _gardenHouseImages;
+
+    protected override Task OnParametersSetAsync()
+    {
+        _gardenHouseImages = GardenHouseDTO?.GardenHouseImages?.Select(image => image.ImagePath).ToList() ?? new List<string?>();
+        
+        return base.OnParametersSetAsync();
+    }
 
     private string _selectedSlide = "0";
 }

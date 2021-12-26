@@ -1,0 +1,46 @@
+﻿@using WoodenGardenFrontServer.Properties
+@using BlazorStrap
+@inject IWebHostEnvironment _webHostEnvironment
+@inject IJSRuntime _jsRuntime
+
+<div class="carousel slide">
+    @if (ImageNames!.Any() && ImageNames!.Count > 1)
+    {
+        <BSCarousel NumberOfItems="ImageNames!.Count">
+            <BSCarouselIndicators/>
+            <div class="carousel-inner">
+                @for (var i = 0; i < ImageNames.Count; i++)
+                    {
+                        var index = i;
+                        <BSCarouselItem src="@(Path.Combine(_imagesDirectory, ImageNames![index]))" alt="Alt"/>
+                    }
+            </div>
+            <BSCarouselControl CarouselDirection="CarouselDirection.Previous"/>
+            <BSCarouselControl CarouselDirection="CarouselDirection.Next"/>
+        </BSCarousel>
+    }
+    else if (ImageNames!.Any() && ImageNames!.Count == 1)
+    {
+        <img class="d-block w-100" src="@(Path.Combine(_imagesDirectory, ImageNames![0]))" alt="Home photo">
+    }
+</div>
+
+
+@code {
+
+    [Parameter]
+    public List<string>? ImageNames { get; set; } = new();
+
+    [Parameter]
+    public string? ImagesFolder { get; set; }
+
+    private string _imagesDirectory = string.Empty;
+
+    protected override Task OnInitializedAsync()
+    {
+        _imagesDirectory = Path.Combine(SettingsConstants.ImagesFolder);
+
+        return base.OnInitializedAsync();
+    }
+
+}
