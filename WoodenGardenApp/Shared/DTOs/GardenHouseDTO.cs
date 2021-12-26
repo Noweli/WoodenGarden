@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WoodenGardenApp.Shared.Models.Database.GardenHouse;
 
 namespace WoodenGardenApp.Shared.DTOs;
 
@@ -8,5 +9,5 @@ public class GardenHouseDTO
     [Required(ErrorMessage = "House name is required")]
     public string? Name { get; set; }
     public string? Description { get; set; }
-    public List<string>? Images { get; set; }
+    public ICollection<GardenHouseImageModel>? GardenHouseImages { get; set; }
 }
