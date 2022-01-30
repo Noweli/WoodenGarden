@@ -21,7 +21,7 @@
         <ValidationSummary/>
 
         <div class="form-group">
-            <label>Garden house name</label>
+            <label>Garden house name</label><br/>
             <InputText @bind-Value="GardenHouseDTO.Name"></InputText>
             <ValidationMessage For="() => GardenHouseDTO!.Name"/>
         </div>
@@ -63,12 +63,19 @@
             @if (GardenHouseDTO is not null && GardenHouseDTO!.GardenHouseImages is not null && GardenHouseDTO!.GardenHouseImages!.Any())
             {
                 var images = GardenHouseDTO!.GardenHouseImages!.Select(image => image.ImagePath).ToList();
-                @for (var index = 0; index < images.Count; index++)
+                @foreach (var image in images)
                 {
-                    var imagePath = Path.Combine(SettingsConstants.ImagesFolder, images[index] ?? string.Empty);
+                    var imagePath = Path.Combine(SettingsConstants.ImagesFolder, image ?? string.Empty);
                     <div class="col-md-2 mt-3">
                         <img class="d-block w-100" src="@imagePath" alt="Home photo">
-                        <button type="button" class="btn btn-outline-danger btn-block mt-3">Delete</button>
+                        @if (ImagesToBeDeleted.Contains(image!))
+                        {
+                            <button type="button" class="btn btn-danger btn-block mt-3" onclick="@(() => ImagesToBeDeleted.Remove(image!))">Delete</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-outline-danger btn-block mt-3" onclick="@(() => ImagesToBeDeleted.Add(image!))">Delete</button>
+                        }
                     </div>
                 }
             }
@@ -76,17 +83,10 @@
         
         <div class="form-group" style="padding-top: 70px;">
             <InputFile OnChange="HandleImageUpload" multiple class="btn btn-secondary"/>
-            
-            <div class="row">
-                @if (GardenHouseDTO is not null || GardenHouseDTO!.GardenHouseImages!.Any())
-                {
-                    
-                }
-            </div>
         </div>
         
         <div class="form-group">
-            <button class="btn btn-primary">Add room</button>
+            <button class="btn btn-primary">@(IsEditMode ? "Edit" : "Add") room</button>
             <NavLink href="gardenhouses" class="btn btn-outline-info">Back</NavLink>
         </div>
     </EditForm>
@@ -99,6 +99,7 @@
     private GardenHouseDTO? GardenHouseDTO { get; set; } = new();
     private BlazoredTextEditor? BlazoredTextEditor { get; set; } = new();
     private List<IBrowserFile> HouseImages { get; } = new();
+    private List<string> ImagesToBeDeleted { get; } = new();
     private string? DescriptionHTML { get; set; }
     private bool IsEditMode { get; set; }
 
@@ -127,21 +128,39 @@
 
     private async Task AddGardenHouseToDatabase()
     {
+        if (IsEditMode)
+        {
+            await EditGardenHouseInDb();
+            return;
+        }
+        
         GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
         var addedHouseId = await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
         
-        var savedImageFiles = new List<string>();
-        foreach (var image in HouseImages)
-        {
-            savedImageFiles.Add(await _imageHandlingService.SaveImage(image));
-        }
-
-        foreach (var imagePath in savedImageFiles)
-        {
-            await _gardenHouseImageService.AddImage(addedHouseId, imagePath);
-        }
+        await SaveImages(addedHouseId);
 
         _navigationManager.NavigateTo("gardenhouses");
+    }
+
+    private async Task EditGardenHouseInDb()
+    {
+        await _gardenHouseService.UpdateGardenHouse(GardenHouseDTO!.Id, GardenHouseDTO.Name, GardenHouseDTO.Description);
+        await SaveImages(GardenHouseDTO!.Id);
+
+        if (ImagesToBeDeleted.Any())
+        {
+            foreach (var image in ImagesToBeDeleted)
+            {
+                var imageModel = GardenHouseDTO!.GardenHouseImages?.FirstOrDefault(img => img.ImagePath!.Equals(image));
+                
+                await _imageHandlingService.DeleteImage(image);
+                
+                if (imageModel is not null)
+                {
+                    await _gardenHouseImageService.DeleteImage(imageModel.Id);
+                }
+            }
+        }
     }
 
     private async Task HandleImageUpload(InputFileChangeEventArgs args)
@@ -172,6 +191,25 @@
         catch (Exception)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_FileNotAdded);
+        }
+    }
+
+    private async Task SaveImages(int houseId)
+    {
+        if (!HouseImages.Any())
+        {
+            return;
+        }
+        
+        var savedImageFiles = new List<string>();
+        foreach (var image in HouseImages)
+        {
+            savedImageFiles.Add(await _imageHandlingService.SaveImage(image));
+        }
+
+        foreach (var imagePath in savedImageFiles)
+        {
+            await _gardenHouseImageService.AddImage(houseId, imagePath);
         }
     }
 }
