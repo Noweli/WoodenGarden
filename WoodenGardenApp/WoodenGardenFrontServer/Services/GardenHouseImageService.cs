@@ -66,7 +66,7 @@ public class GardenHouseImageService : IGardenHouseImageService
         try
         {
             var response = await _httpClient.DeleteAsync(
-                $"{ApiConstants.Api_GardenHouseImageControllerUri}\\deleteimages?ids={imageId}");
+                $"{ApiConstants.Api_GardenHouseImageControllerUri}\\deleteimage?id={imageId}");
 
             if (!response.IsSuccessStatusCode)
             {

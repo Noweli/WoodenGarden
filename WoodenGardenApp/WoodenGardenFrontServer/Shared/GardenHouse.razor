@@ -1,4 +1,6 @@
 ﻿@using WoodenGardenApp.Shared.DTOs
+@inject NavigationManager _navigationManager
+
 <div class="col">
     <div class="card shadow-sm">
         <ImagesCarousel ImageNames="_gardenHouseImages"></ImagesCarousel>
@@ -9,7 +11,7 @@
             <p class="card-text">@((MarkupString)GardenHouseDTO?.Description!)</p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" @onclick="NavigateToEdit">Edit</button>
                 </div>
             </div>
         </div>
@@ -31,4 +33,9 @@
     }
 
     private string _selectedSlide = "0";
+
+    private void NavigateToEdit()
+    {
+        _navigationManager.NavigateTo($"AddGardenHouse/{GardenHouseDTO!.Id}");
+    }
 }

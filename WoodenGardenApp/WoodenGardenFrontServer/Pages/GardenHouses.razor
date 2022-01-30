@@ -10,15 +10,18 @@
 </div>
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-sm2 row-cols-md-3 g-3">
-        @if (GardenHousesList is not null)
+    @if (GardenHousesList is not null)
+    {
+        @foreach (var chunk in GardenHousesList.Chunk(3))
         {
-            foreach (var houseDTO in GardenHousesList)
-            {
-                <GardenHouse GardenHouseDTO="houseDTO"/>
-            }
+            <div class="row row-cols-1 row-cols-sm2 row-cols-md-3 g-3 mb-3">
+                @foreach (var houseDTO in chunk)
+                {
+                    <GardenHouse GardenHouseDTO="houseDTO"/>
+                }
+            </div>
         }
-    </div>
+    }
 </div>
 
 @code {

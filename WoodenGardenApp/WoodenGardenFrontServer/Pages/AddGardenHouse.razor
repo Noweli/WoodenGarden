@@ -1,8 +1,11 @@
 ﻿@page "/AddGardenHouse"
+@page "/AddGardenHouse/{Id:int}"
+
 @using WoodenGardenFront.Helpers.JsHelpers
 @using WoodenGardenFront.Properties
 @using WoodenGardenApp.Shared.DTOs
 @using Blazored.TextEditor
+@using WoodenGardenFrontServer.Properties
 @using WoodenGardenFrontServer.Services.IServices
 @inject IGardenHouseService _gardenHouseService
 @inject IGardenHouseImageService _gardenHouseImageService
@@ -10,13 +13,15 @@
 @inject IJSRuntime _jsRuntime
 @inject NavigationManager _navigationManager
 
+<h3>@(IsEditMode ? "Edit" : "Create") mode</h3>
+
 <div class="container align-self-center mt-2 border-dark border-2 bg-light">
     <EditForm Model="@GardenHouseDTO" OnValidSubmit="AddGardenHouseToDatabase">
         <DataAnnotationsValidator/>
         <ValidationSummary/>
 
         <div class="form-group">
-            <label>Garden house name</label>
+            <label>Garden house name</label><br/>
             <InputText @bind-Value="GardenHouseDTO.Name"></InputText>
             <ValidationMessage For="() => GardenHouseDTO!.Name"/>
         </div>
@@ -54,56 +59,111 @@
             </BlazoredTextEditor>
         </div>
         
+        <div class="row">
+            @if (GardenHouseDTO is not null && GardenHouseDTO!.GardenHouseImages is not null && GardenHouseDTO!.GardenHouseImages!.Any())
+            {
+                var images = GardenHouseDTO!.GardenHouseImages!.Select(image => image.ImagePath).ToList();
+                @foreach (var image in images)
+                {
+                    var imagePath = Path.Combine(SettingsConstants.ImagesFolder, image ?? string.Empty);
+                    <div class="col-md-2 mt-3">
+                        <img class="d-block w-100" src="@imagePath" alt="Home photo">
+                        @if (ImagesToBeDeleted.Contains(image!))
+                        {
+                            <button type="button" class="btn btn-danger btn-block mt-3" onclick="@(() => ImagesToBeDeleted.Remove(image!))">Delete</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-outline-danger btn-block mt-3" onclick="@(() => ImagesToBeDeleted.Add(image!))">Delete</button>
+                        }
+                    </div>
+                }
+            }
+        </div>
+        
         <div class="form-group" style="padding-top: 70px;">
             <InputFile OnChange="HandleImageUpload" multiple class="btn btn-secondary"/>
-            
-            <div class="row">
-                @if (GardenHouseDTO is not null || GardenHouseDTO!.GardenHouseImages!.Any())
-                {
-                    
-                }
-            </div>
         </div>
         
         <div class="form-group">
-            <button class="btn btn-primary">Add room</button>
+            <button class="btn btn-primary">@(IsEditMode ? "Edit" : "Add") room</button>
             <NavLink href="gardenhouses" class="btn btn-outline-info">Back</NavLink>
         </div>
     </EditForm>
 </div>
 
 @code {
-    private GardenHouseDTO? GardenHouseDTO { get; } = new();
+    [Parameter]
+    public int? Id { get; set; }
+    
+    private GardenHouseDTO? GardenHouseDTO { get; set; } = new();
     private BlazoredTextEditor? BlazoredTextEditor { get; set; } = new();
-    private List<IBrowserFile> ImagesToBeAdded { get; set; } = new();
+    private List<IBrowserFile> HouseImages { get; } = new();
+    private List<string> ImagesToBeDeleted { get; } = new();
     private string? DescriptionHTML { get; set; }
+    private bool IsEditMode { get; set; }
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        if (GardenHouseDTO is not null)
+        if (Id is not null)
         {
-            DescriptionHTML = GardenHouseDTO.Description ?? string.Empty;
+            IsEditMode = true;
+            await LoadGardenHouseIfEdit();
+        }
+    }
+
+    private async Task LoadGardenHouseIfEdit()
+    {
+        var gardenHouses = await _gardenHouseService.GetGardenHouses();
+        GardenHouseDTO = gardenHouses!.FirstOrDefault(gardenHouse => gardenHouse.Id == Id);
+
+        if (GardenHouseDTO is null)
+        {
+            await _jsRuntime.ToastrError(ErrorMessages.Client_GardenHouseService_GetHousesError);
+            return;
         }
         
-        return Task.CompletedTask;
+        DescriptionHTML = GardenHouseDTO.Description ?? string.Empty;
     }
 
     private async Task AddGardenHouseToDatabase()
     {
+        if (IsEditMode)
+        {
+            await EditGardenHouseInDb();
+            return;
+        }
+        
         GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
         var addedHouseId = await _gardenHouseService.AddGardenHouse(GardenHouseDTO!.Name, GardenHouseDTO.Description);
         
-        var savedImageFiles = new List<string>();
-        foreach (var image in ImagesToBeAdded)
-        {
-            savedImageFiles.Add(await _imageHandlingService.SaveImage(image));
-        }
+        await SaveImages(addedHouseId);
 
-        foreach (var imagePath in savedImageFiles)
-        {
-            await _gardenHouseImageService.AddImage(addedHouseId, imagePath);
-        }
+        _navigationManager.NavigateTo("gardenhouses");
+    }
 
+    private async Task EditGardenHouseInDb()
+    {
+        GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
+        
+        await _gardenHouseService.UpdateGardenHouse(GardenHouseDTO!.Id, GardenHouseDTO.Name, GardenHouseDTO.Description);
+        await SaveImages(GardenHouseDTO!.Id);
+
+        if (ImagesToBeDeleted.Any())
+        {
+            foreach (var image in ImagesToBeDeleted)
+            {
+                var imageModel = GardenHouseDTO!.GardenHouseImages?.FirstOrDefault(img => img.ImagePath!.Equals(image));
+                
+                await _imageHandlingService.DeleteImage(image);
+                
+                if (imageModel is not null)
+                {
+                    await _gardenHouseImageService.DeleteImage(imageModel.Id);
+                }
+            }
+        }
+        
         _navigationManager.NavigateTo("gardenhouses");
     }
 
@@ -129,12 +189,31 @@
                     continue;
                 }
                 
-                ImagesToBeAdded.Add(file);
+                HouseImages.Add(file);
             }
         }
         catch (Exception)
         {
             await _jsRuntime.ToastrError(ErrorMessages.Client_FileUpload_FileNotAdded);
+        }
+    }
+
+    private async Task SaveImages(int houseId)
+    {
+        if (!HouseImages.Any())
+        {
+            return;
+        }
+        
+        var savedImageFiles = new List<string>();
+        foreach (var image in HouseImages)
+        {
+            savedImageFiles.Add(await _imageHandlingService.SaveImage(image));
+        }
+
+        foreach (var imagePath in savedImageFiles)
+        {
+            await _gardenHouseImageService.AddImage(houseId, imagePath);
         }
     }
 }

@@ -48,16 +48,19 @@ public class ImageHandlingService : IImageHandlingService
         return fileNameGuid;
     }
 
-    public async Task<bool> DeleteImage(string imagePath)
+    public async Task<bool> DeleteImage(string imageGuid)
     {
+        var imagesDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "images", "home");
+        var filePath = Path.Combine(imagesDirectory, imageGuid);
+        
         try
         {
-            if (!File.Exists(imagePath))
+            if (!File.Exists(filePath))
             {
                 return false;
             }
 
-            File.Delete(imagePath);
+            File.Delete(filePath);
         }
         catch (Exception e)
         {
