@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WoodenGardenApp.Shared.DTOs;
 using WoodenGardenApp.Shared.Helpers;
 using WoodenGardenApp.Shared.Models.Api;
@@ -54,24 +55,25 @@ public class GardenHouseImageController
         return new OkResult();
     }
 
-    [HttpDelete("deleteimages")]
-    public async Task<IActionResult> DeleteImages(List<int>? ids)
+    [HttpDelete("deleteimage")]
+    public async Task<IActionResult> DeleteImages(int id)
     {
-        if (ids is null || !ids.Any())
+        if (id < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImageIdsToDeleteNotProvided);
         }
 
-        var imagesToBeDeleted = _dbContext.GardenHouseImageModels!.Where(image => ids.Contains(image.Id)).ToList();
+        var imageToBeDeleted =
+            await _dbContext.GardenHouseImageModels!.FirstOrDefaultAsync(image => image.Id.Equals(id));
 
-        if (!imagesToBeDeleted.Any())
+        if (imageToBeDeleted is null)
         {
             return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouse_ImagesNotFound);
         }
 
         try
         {
-            _dbContext.GardenHouseImageModels!.RemoveRange(imagesToBeDeleted);
+            _dbContext.GardenHouseImageModels!.Remove(imageToBeDeleted);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
