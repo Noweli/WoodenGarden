@@ -144,6 +144,8 @@
 
     private async Task EditGardenHouseInDb()
     {
+        GardenHouseDTO!.Description = await BlazoredTextEditor!.GetHTML();
+        
         await _gardenHouseService.UpdateGardenHouse(GardenHouseDTO!.Id, GardenHouseDTO.Name, GardenHouseDTO.Description);
         await SaveImages(GardenHouseDTO!.Id);
 
