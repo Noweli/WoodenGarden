@@ -5,5 +5,5 @@ namespace WoodenGardenFrontServer.Services.IServices;
 public interface IImageHandlingService
 {
     Task<string> SaveImage(IBrowserFile image);
-    Task<bool> DeleteImage(string imagePath);
+    Task<bool> DeleteImage(string imageGuid);
 }
