@@ -90,36 +90,36 @@ public class GardenHouseController
     }
 
     [HttpPatch("update")]
-    public async Task<IActionResult> UpdateGardenHouse(int id, string? name, string? description)
+    public async Task<IActionResult> UpdateGardenHouse([FromBody]GardenHouseDTO gardenHouseDTO)
     {
         EntityEntry<GardenHouseModel> updatedGardenHouse;
         
-        if (id < 0)
+        if (gardenHouseDTO.Id < 0)
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_IdToUpdateNotProvided);
         }
 
-        if (name.IsNullOrWhiteSpace() && description.IsNullOrWhiteSpace())
+        if (gardenHouseDTO.Name.IsNullOrWhiteSpace() && gardenHouseDTO.Description.IsNullOrWhiteSpace())
         {
             return new BadRequestObjectResult(ErrorMessages
                 .ApiError_GardenHouseValidation_NameAndDescriptionToUpdateEmpty);
         }
 
-        var gardenHouseToUpdate = await _dbContext.GardenHouseModels!.FindAsync(id);
+        var gardenHouseToUpdate = await _dbContext.GardenHouseModels!.FindAsync(gardenHouseDTO.Id);
 
         if (gardenHouseToUpdate is null)
         {
             return new NotFoundObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseWithIdNotFound);
         }
 
-        if (!name.IsNullOrWhiteSpace())
+        if (!gardenHouseDTO.Name.IsNullOrWhiteSpace())
         {
-            gardenHouseToUpdate.Name = name;
+            gardenHouseToUpdate.Name = gardenHouseDTO.Name;
         }
 
-        if (description is not null)
+        if (gardenHouseDTO.Description is not null)
         {
-            gardenHouseToUpdate.Description = description;
+            gardenHouseToUpdate.Description = gardenHouseDTO.Description;
         }
 
         try
