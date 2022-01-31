@@ -8,8 +8,8 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<GardenHouseDTO, GardenHouseModel>().ReverseMap();
-        CreateMap<GardenHouseImageDTO, GardenHouseImageModel>().ForMember(model => model.GardenHouseId,
+        CreateMap<GardenHouseDTO, GardenHouse>().ReverseMap();
+        CreateMap<GardenHouseImageDTO, GardenHouseImage>().ForMember(model => model.GardenHouseId,
             opt =>
             {
                 opt.MapFrom(dto => dto.RoomId);

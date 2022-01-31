@@ -43,7 +43,7 @@ public class GardenHouseService : IGardenHouseService
             if (result.IsSuccessStatusCode)
             {
                 var resultContent = await result.Content.ReadAsStringAsync();
-                var resultHouse = JsonConvert.DeserializeObject<GardenHouseModel>(resultContent);
+                var resultHouse = JsonConvert.DeserializeObject<GardenHouse>(resultContent);
                 
                 await _jsRuntime.ToastrSuccess(Messages.Client_GardenHouseService_HouseAdded);
                 return resultHouse?.Id ?? 0;

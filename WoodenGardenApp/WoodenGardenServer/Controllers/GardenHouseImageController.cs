@@ -36,7 +36,7 @@ public class GardenHouseImageController
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_ImagePathNotProvided);
         }
 
-        var imageToAdd = _mapper.Map<GardenHouseImageDTO, GardenHouseImageModel>(gardenHouseImageDTO);
+        var imageToAdd = _mapper.Map<GardenHouseImageDTO, GardenHouseImage>(gardenHouseImageDTO);
         
         try
         {

@@ -27,14 +27,14 @@ public class GardenHouseController
     [HttpPost("add")]
     public async Task<IActionResult> AddGardenHouse([FromBody] GardenHouseDTO gardenHouseDTO)
     {
-        EntityEntry<GardenHouseModel> addedGardenHouse;
+        EntityEntry<GardenHouse> addedGardenHouse;
         
         if (gardenHouseDTO.Name.IsNullOrWhiteSpace())
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_NameIsEmpty);
         }
 
-        var gardenHouse = new GardenHouseModel
+        var gardenHouse = new GardenHouse
         {
             Name = gardenHouseDTO.Name,
             Description = gardenHouseDTO.Description ?? string.Empty
@@ -92,7 +92,7 @@ public class GardenHouseController
     [HttpPatch("update")]
     public async Task<IActionResult> UpdateGardenHouse([FromBody]GardenHouseDTO gardenHouseDTO)
     {
-        EntityEntry<GardenHouseModel> updatedGardenHouse;
+        EntityEntry<GardenHouse> updatedGardenHouse;
         
         if (gardenHouseDTO.Id < 0)
         {
@@ -147,7 +147,7 @@ public class GardenHouseController
             var gardenHousesList = await _dbContext.GardenHouseModels!
                 .Include(model => model.GardenHouseImages).ToListAsync();
 
-            var gardenHouseDTOs = gardenHousesList.Select(house => _mapper.Map<GardenHouseModel, GardenHouseDTO>(house)).ToList();
+            var gardenHouseDTOs = gardenHousesList.Select(house => _mapper.Map<GardenHouse, GardenHouseDTO>(house)).ToList();
 
             return gardenHouseDTOs;
 
