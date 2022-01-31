@@ -40,7 +40,7 @@ public class GardenHouseImageController
         
         try
         {
-            _ = await _dbContext.GardenHouseImageModels!.AddAsync(imageToAdd);
+            _ = await _dbContext.GardenHouseImages!.AddAsync(imageToAdd);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -64,7 +64,7 @@ public class GardenHouseImageController
         }
 
         var imageToBeDeleted =
-            await _dbContext.GardenHouseImageModels!.FirstOrDefaultAsync(image => image.Id.Equals(id));
+            await _dbContext.GardenHouseImages!.FirstOrDefaultAsync(image => image.Id.Equals(id));
 
         if (imageToBeDeleted is null)
         {
@@ -73,7 +73,7 @@ public class GardenHouseImageController
 
         try
         {
-            _dbContext.GardenHouseImageModels!.Remove(imageToBeDeleted);
+            _dbContext.GardenHouseImages!.Remove(imageToBeDeleted);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
