@@ -27,14 +27,14 @@ public class GardenHouseController
     [HttpPost("add")]
     public async Task<IActionResult> AddGardenHouse([FromBody] GardenHouseDTO gardenHouseDTO)
     {
-        EntityEntry<GardenHouseModel> addedGardenHouse;
+        EntityEntry<GardenHouse> addedGardenHouse;
         
         if (gardenHouseDTO.Name.IsNullOrWhiteSpace())
         {
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_NameIsEmpty);
         }
 
-        var gardenHouse = new GardenHouseModel
+        var gardenHouse = new GardenHouse
         {
             Name = gardenHouseDTO.Name,
             Description = gardenHouseDTO.Description ?? string.Empty
@@ -42,7 +42,7 @@ public class GardenHouseController
 
         try
         {
-            addedGardenHouse = await _dbContext.GardenHouseModels!.AddAsync(gardenHouse);
+            addedGardenHouse = await _dbContext.GardenHouses!.AddAsync(gardenHouse);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -65,7 +65,7 @@ public class GardenHouseController
             return new BadRequestObjectResult(ErrorMessages.ApiError_GardenHouseValidation_HouseIdNotProvided);
         }
 
-        var gardenHouseToRemove = await _dbContext.GardenHouseModels!.FindAsync(id);
+        var gardenHouseToRemove = await _dbContext.GardenHouses!.FindAsync(id);
 
         if (gardenHouseToRemove is null)
         {
@@ -74,7 +74,7 @@ public class GardenHouseController
 
         try
         {
-            _ = _dbContext.GardenHouseModels.Remove(gardenHouseToRemove);
+            _ = _dbContext.GardenHouses.Remove(gardenHouseToRemove);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -92,7 +92,7 @@ public class GardenHouseController
     [HttpPatch("update")]
     public async Task<IActionResult> UpdateGardenHouse([FromBody]GardenHouseDTO gardenHouseDTO)
     {
-        EntityEntry<GardenHouseModel> updatedGardenHouse;
+        EntityEntry<GardenHouse> updatedGardenHouse;
         
         if (gardenHouseDTO.Id < 0)
         {
@@ -105,7 +105,7 @@ public class GardenHouseController
                 .ApiError_GardenHouseValidation_NameAndDescriptionToUpdateEmpty);
         }
 
-        var gardenHouseToUpdate = await _dbContext.GardenHouseModels!.FindAsync(gardenHouseDTO.Id);
+        var gardenHouseToUpdate = await _dbContext.GardenHouses!.FindAsync(gardenHouseDTO.Id);
 
         if (gardenHouseToUpdate is null)
         {
@@ -124,7 +124,7 @@ public class GardenHouseController
 
         try
         {
-            updatedGardenHouse = _dbContext.GardenHouseModels.Update(gardenHouseToUpdate);
+            updatedGardenHouse = _dbContext.GardenHouses.Update(gardenHouseToUpdate);
             _ = await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
@@ -144,10 +144,10 @@ public class GardenHouseController
     {
         try
         {
-            var gardenHousesList = await _dbContext.GardenHouseModels!
+            var gardenHousesList = await _dbContext.GardenHouses!
                 .Include(model => model.GardenHouseImages).ToListAsync();
 
-            var gardenHouseDTOs = gardenHousesList.Select(house => _mapper.Map<GardenHouseModel, GardenHouseDTO>(house)).ToList();
+            var gardenHouseDTOs = gardenHousesList.Select(house => _mapper.Map<GardenHouse, GardenHouseDTO>(house)).ToList();
 
             return gardenHouseDTOs;
 

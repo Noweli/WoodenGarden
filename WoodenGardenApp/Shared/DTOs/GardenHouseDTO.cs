@@ -9,5 +9,5 @@ public class GardenHouseDTO
     [Required(ErrorMessage = "House name is required")]
     public string? Name { get; set; }
     public string? Description { get; set; }
-    public ICollection<GardenHouseImageModel>? GardenHouseImages { get; set; }
+    public ICollection<GardenHouseImage>? GardenHouseImages { get; set; }
 }

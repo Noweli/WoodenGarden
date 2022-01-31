@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace WoodenGardenApp.Shared.Models.Database.GardenHouse
 {
-    public class GardenHouseImageModel
+    public class GardenHouseImage
     {
         public int Id { get; set; }
         public int GardenHouseId { get; set; }
@@ -11,6 +11,6 @@ namespace WoodenGardenApp.Shared.Models.Database.GardenHouse
 
         [JsonIgnore]
         [ForeignKey("GardenHouseId")]
-        public virtual GardenHouseModel? GardenHouse { get; set; }
+        public virtual GardenHouse? GardenHouse { get; set; }
     }
 }

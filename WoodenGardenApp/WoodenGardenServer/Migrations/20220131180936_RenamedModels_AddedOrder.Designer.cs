@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodenGardenServer.Data;
 
@@ -10,9 +11,10 @@ using WoodenGardenServer.Data;
 namespace WoodenGardenServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220131180936_RenamedModels_AddedOrder")]
+    partial class RenamedModels_AddedOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace WoodenGardenServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GardenHouses");
+                    b.ToTable("GardenHouseModels");
                 });
 
             modelBuilder.Entity("WoodenGardenApp.Shared.Models.Database.GardenHouse.GardenHouseImage", b =>
@@ -59,32 +61,7 @@ namespace WoodenGardenServer.Migrations
 
                     b.HasIndex("GardenHouseId");
 
-                    b.ToTable("GardenHouseImages");
-                });
-
-            modelBuilder.Entity("WoodenGardenApp.Shared.Models.Database.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequesterEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequesterName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequesterPhoneNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
+                    b.ToTable("GardenHouseImageModels");
                 });
 
             modelBuilder.Entity("WoodenGardenApp.Shared.Models.Database.GardenHouse.GardenHouseImage", b =>
