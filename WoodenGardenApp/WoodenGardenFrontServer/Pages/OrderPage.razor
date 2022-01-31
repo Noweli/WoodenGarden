@@ -1,0 +1,39 @@
+﻿@page "/order"
+@using WoodenGardenApp.Shared.Models.Database
+<div class="container">
+    <div class="card m-3">
+        <EditForm class="row g-3 m-2" Model="@Order" OnValidSubmit="HandleOrder">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+
+            <div class="col-8">
+                <label for="inputName" class="form-label">Name</label>
+                <InputText class="form-control" id="inputName" @bind-Value="@Order.RequesterName"/>
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>
+                <InputText class="form-control" id="inputEmail" @bind-Value="@Order.RequesterEmail"/>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPhone" class="form-label">Phone Number</label>
+                <InputText class="form-control" id="inputPhone" @bind-Value="@Order.RequesterPhoneNo"/>
+            </div>
+            <div class="col-12">
+                <label for="inputDescription" class="form-label">Description</label>
+                <InputTextArea class="form-control" id="inputDescription" placeholder="Describe your order!" @bind-Value="@Order.Description"/>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    public Order Order { get; set; } = new();
+
+    private async Task HandleOrder()
+    {
+    }
+
+}
