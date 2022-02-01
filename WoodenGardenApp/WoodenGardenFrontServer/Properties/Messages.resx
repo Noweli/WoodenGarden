@@ -27,4 +27,7 @@
     <data name="Client_GardenHouseService_HouseUpdated" xml:space="preserve">
         <value>Garden house updated successfully.</value>
     </data>
+    <data name="Client_Order_OrderAdded" xml:space="preserve">
+        <value>Order added successfully.</value>
+    </data>
 </root>

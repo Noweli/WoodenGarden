@@ -24,4 +24,7 @@
     <data name="Api_GardenHouseImageControllerUri" xml:space="preserve">
         <value>https://localhost:7053/api/gardenhouseimage</value>
     </data>
+    <data name="Api_OrderUri" xml:space="preserve">
+        <value>https://localhost:7053/api/order</value>
+    </data>
 </root>

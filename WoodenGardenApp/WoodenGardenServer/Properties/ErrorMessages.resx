@@ -63,4 +63,10 @@
     <data name="ApiError_GardenHouse_FailedToGetHouses" xml:space="preserve">
         <value>Could not get all house models from api.</value>
     </data>
+    <data name="ApiError_Order_RequiredFieldMissing" xml:space="preserve">
+        <value>Could not add new order. {0} is required.</value>
+    </data>
+    <data name="ApiError_Order_FailedToAddOrder" xml:space="preserve">
+        <value>Failed to add order. Exception occured.</value>
+    </data>
 </root>

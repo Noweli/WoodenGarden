@@ -11,6 +11,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IGardenHouseService, GardenHouseService>();
 builder.Services.AddScoped<IGardenHouseImageService, GardenHouseImageService>();
 builder.Services.AddScoped<IImageHandlingService, ImageHandlingService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddBootstrapCss();
 

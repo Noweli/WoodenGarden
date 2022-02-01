@@ -250,6 +250,15 @@ namespace WoodenGardenFront.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not add new order..
+        /// </summary>
+        internal static string Client_Order_AddFailed {
+            get {
+                return ResourceManager.GetString("Client_Order_AddFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message has to be provided in toastr..
         /// </summary>
         internal static string Client_ToastrHelper_MessageNotProvided {

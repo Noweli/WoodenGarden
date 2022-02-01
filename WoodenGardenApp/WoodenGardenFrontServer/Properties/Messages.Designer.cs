@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace WoodenGardenFront.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -81,6 +84,15 @@ namespace WoodenGardenFront.Properties {
         internal static string Client_GardenHouseService_HouseUpdated {
             get {
                 return ResourceManager.GetString("Client_GardenHouseService_HouseUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order added successfully..
+        /// </summary>
+        internal static string Client_Order_OrderAdded {
+            get {
+                return ResourceManager.GetString("Client_Order_OrderAdded", resourceCulture);
             }
         }
     }

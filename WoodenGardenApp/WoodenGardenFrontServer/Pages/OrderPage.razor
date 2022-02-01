@@ -1,5 +1,8 @@
 ﻿@page "/order"
 @using WoodenGardenApp.Shared.Models.Database
+@using WoodenGardenFrontServer.Services.IServices
+@inject IOrderService _orderService
+
 <div class="container">
     <div class="card m-3">
         <EditForm class="row g-3 m-2" Model="@Order" OnValidSubmit="HandleOrder">
@@ -32,10 +35,13 @@
 </div>
 
 @code {
-    public Order Order { get; set; } = new();
+    private Order Order { get; set; } = new();
 
     private async Task HandleOrder()
     {
+        await _orderService.AddOrder(Order);
+
+        Order = new Order();
     }
 
 }
