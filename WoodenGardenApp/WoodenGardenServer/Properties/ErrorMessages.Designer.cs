@@ -194,5 +194,23 @@ namespace WoodenGardenServer.Properties {
                 return ResourceManager.GetString("ApiError_GardenHouseValidation_NameIsEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to add order. Exception occured..
+        /// </summary>
+        internal static string ApiError_Order_FailedToAddOrder {
+            get {
+                return ResourceManager.GetString("ApiError_Order_FailedToAddOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not add new order. {0} is required..
+        /// </summary>
+        internal static string ApiError_Order_RequiredFieldMissing {
+            get {
+                return ResourceManager.GetString("ApiError_Order_RequiredFieldMissing", resourceCulture);
+            }
+        }
     }
 }
