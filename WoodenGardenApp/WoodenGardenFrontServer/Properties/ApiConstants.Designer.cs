@@ -77,5 +77,14 @@ namespace WoodenGardenFront.Properties {
                 return ResourceManager.GetString("Api_GardenHouseImageControllerUri", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://localhost:7053/api/order.
+        /// </summary>
+        internal static string Api_OrderUri {
+            get {
+                return ResourceManager.GetString("Api_OrderUri", resourceCulture);
+            }
+        }
     }
 }

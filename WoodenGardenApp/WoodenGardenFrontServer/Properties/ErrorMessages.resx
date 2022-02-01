@@ -84,4 +84,7 @@
     <data name="Client_FileUpload_FileExtensionNotSupported" xml:space="preserve">
         <value>Could not upload file. File extension not supported.</value>
     </data>
+    <data name="Client_Order_AddFailed" xml:space="preserve">
+        <value>Could not add new order.</value>
+    </data>
 </root>
